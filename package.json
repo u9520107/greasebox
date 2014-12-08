@@ -1,0 +1,19 @@
+{
+  "name": "greasebox",
+  "version": "0.0.0",
+  "description": "greasebox\r =========",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/u9520107/greasebox"
+  },
+  "author": "Jack Tzu-Chieh Huang <u9520107@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/u9520107/greasebox/issues"
+  },
+  "homepage": "https://github.com/u9520107/greasebox"
+}
