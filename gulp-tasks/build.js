@@ -3,6 +3,8 @@ var path = require('path');
 var cp = require('child_process');
 var co = require('co');
 
+var traceur = require('traceur');
+require(traceur.RUNTIME_PATH);
 
 
 var traceurTransform = require(path.resolve(__dirname , '../dist/node/traceur-transform')).default;

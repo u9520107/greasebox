@@ -19,10 +19,10 @@ function writeMap(root, ext) {
   if (!ext) {
     ext = '.map';
   }
-  return through.obj(function(file, enc, cb) {
+  return through.obj(function(file, enc, next) {
     if (file.isNull()) {
-      cb();
-    } else {
+      return next();
+    } else if (file.sourceMap) {
       var sourceRoot = root ? root : file.sourceMap.sourceRoot;
       if (sourceRoot !== file.sourceMap.sourceRoot) {
         var nameCheck = new RegExp('^' + sourceRoot, 'i');
@@ -45,8 +45,10 @@ function writeMap(root, ext) {
       });
       this.push(file);
       this.push(mapFile);
-      cb();
+    } else {
+      this.push(file);
     }
+    next();
   });
 }
 var $__default = writeMap;

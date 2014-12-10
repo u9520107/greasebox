@@ -5,6 +5,8 @@ var through = require('through2');
 var co = require('co');
 var cofs = require('co-fs');
 
+var traceur = require('traceur');
+require(traceur.RUNTIME_PATH);
 
 var jsxTransform = require(path.resolve(__dirname, '../source/node/jsx-transform')).default;
 var loadMap = require(path.resolve(__dirname, '../dist/node/load-map')).default;
@@ -15,7 +17,11 @@ describe('jsxTransform', function() {
   afterEach(function (cb) {
     co(function *(){
       if(yield cofs.exists(path.resolve(__dirname, 'tmp/jsx-transform'))) {
+        try {
          yield rm(path.resolve(__dirname, 'tmp/jsx-transform'));
+        } catch(err) {
+          console.log(err);
+        }
       }
       cb();
     });

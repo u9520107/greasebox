@@ -7,6 +7,8 @@ var cofs = require('co-fs');
 var recast = require('recast');
 
 
+var traceur = require('traceur');
+require(traceur.RUNTIME_PATH);
 var traceurTransform = require(path.resolve(__dirname, '../source/node/traceur-transform')).default;
 var jsxTransform = require(path.resolve(__dirname, '../dist/node/jsx-transform')).default;
 var rm = require(path.resolve(__dirname, '../dist/node/rm')).default;

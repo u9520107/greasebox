@@ -6,6 +6,9 @@ var co = require('co');
 var cofs = require('co-fs');
 
 
+var traceur = require('traceur');
+require(traceur.RUNTIME_PATH);
+
 var removeCss = require(path.resolve(__dirname, '../source/node/remove-css')).default;
 var loadMap = require(path.resolve(__dirname, '../dist/node/load-map')).default;
 var rm = require(path.resolve(__dirname, '../dist/node/rm')).default;

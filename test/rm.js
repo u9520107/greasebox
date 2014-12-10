@@ -5,6 +5,8 @@ var through = require('through2');
 var co = require('co');
 var cofs = require('co-fs');
 
+var traceur = require('traceur');
+require(traceur.RUNTIME_PATH);
 
 var rm = require(path.resolve(__dirname, '../source/node/rm')).default;
 var _rm = require(path.resolve(__dirname, '../dist/node/rm')).default;

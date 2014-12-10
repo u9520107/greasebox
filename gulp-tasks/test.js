@@ -4,8 +4,8 @@ var istanbul = require('gulp-istanbul');
 var mocha = require('gulp-mocha');
 var istanbulTraceur = require('istanbul-traceur');
 var through = require('through2');
-var traceur = require('traceur');
 
+var traceur = require('traceur');
 require(traceur.RUNTIME_PATH);
 
 var traceurInstrumenter = require(path.resolve(__dirname, '../dist/node/traceur-instrumenter')).default;
