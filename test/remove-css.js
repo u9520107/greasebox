@@ -29,15 +29,12 @@ describe('removeCss', function() {
       .pipe(removeCss())
       .pipe(through.obj(function (file, enc, next) {
         var transformed = file.contents.toString(enc);
-        co(function * () {
-          var expected = yield cofs.readFile(path.resolve(__dirname, 'files/b.jsx'), 'utf8');
-          try {
-            expect(transformed).to.equal(expected);
-            next();
-          } catch(err) {
-            next(err);
-          }
-        });
+        try {
+          expect(/\.css!/.test(transformed)).to.equal(false);
+          next();
+        } catch(err) {
+          next(err);
+        }
       }))
       .on('error', function (err) {
         cb(err);
