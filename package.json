@@ -4,7 +4,7 @@
   "description": "greasebox\r =========",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/gulp/bin/gulp test"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,32 @@
   "bugs": {
     "url": "https://github.com/u9520107/greasebox/issues"
   },
-  "homepage": "https://github.com/u9520107/greasebox"
+  "homepage": "https://github.com/u9520107/greasebox",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "co-exec": "^1.1.0",
+    "gulp": "^3.8.10",
+    "gulp-istanbul": "git://github.com/SBoudrias/gulp-istanbul#harmony",
+    "gulp-mocha": "^2.0.0",
+    "istanbul-traceur": "^1.0.7",
+    "koa": "^0.13.0",
+    "koa-mount": "^1.3.0",
+    "koa-static": "^1.4.7",
+    "mocha": "^2.0.1"
+  },
+  "dependencies": {
+    "co": "^4.0.1",
+    "co-fs": "^1.2.0",
+    "debug": "^2.1.0",
+    "escodegen": "^1.4.1",
+    "esprima": "^1.2.2",
+    "gulp-util": "^3.0.1",
+    "istanbul": "^0.3.5",
+    "react-tools": "^0.12.1",
+    "recast": "^0.9.8",
+    "source-map": "^0.1.40",
+    "through2": "^0.6.3",
+    "traceur": "0.0.79",
+    "vinyl-sourcemaps-apply": "^0.1.4"
+  }
 }
