@@ -14,10 +14,12 @@ var cofs = ($__co_45_fs__ = require("co-fs"), $__co_45_fs__ && $__co_45_fs__.__e
 var co = ($__co__ = require("co"), $__co__ && $__co__.__esModule && $__co__ || {default: $__co__}).default;
 var path = ($__path__ = require("path"), $__path__ && $__path__.__esModule && $__path__ || {default: $__path__}).default;
 function loadMap(ext) {
-  ext = ext || '.map';
-  return through.obj(function(file, enc, cb) {
+  if (!ext) {
+    ext = '.map';
+  }
+  return through.obj(function(file, enc, next) {
     if (file.isNull()) {
-      cb();
+      next();
     } else {
       var self = this;
       co(function*() {
@@ -38,11 +40,11 @@ function loadMap(ext) {
             };
           }
           file.sourceMap = map;
+          self.push(file);
+          next();
         } catch (err) {
-          console.log(err);
+          next(err);
         }
-        self.push(file);
-        cb();
       });
     }
   });

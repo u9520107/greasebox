@@ -1,18 +1,17 @@
 import through from 'through2';
 import recast from 'recast';
-import traceur from 'traceur';
 import applyMap from 'vinyl-sourcemaps-apply';
 
 /**
- * @function nodeTransform
+ * @function
  *
  */
-function nodeTransform() {
+function removeCss() {
   return through.obj(function(file, enc, next) {
     try {
       if (file.isNull()) {
         return next();
-      } else {
+      } else if(file.path.match(/\.(js|jsx)$/)){
         var ast = recast.parse(file.contents.toString(enc), {
           sourceFileName: file.relative
         });
@@ -35,30 +34,19 @@ function nodeTransform() {
         if (file.sourceMap && output.map) {
           output.map.sourceRoot = file.buildStep;
           applyMap(file, output.map);
+          file.buildStep = '@remove-css/';
 
         }
-        var tc = new traceur.Compiler({
-          modules: 'commonjs',
-          sourceMaps: 'file',
-          generators: 'parse'
-        });
-        output = tc.compile(file.contents.toString(enc), file.relative, file.relative + '.map');
-        file.contents = new Buffer(output);
-        if (file.sourceMap) {
-        var map = JSON.parse(tc.getSourceMap());
-          map.sourceRoot = '@remove-css/';
-          applyMap(file, map);
-        }
-
         
         this.push(file);
-        next();
+      } else {
+        this.push(file);
       }
+      next();
     } catch (err) {
-      console.log(err);
       next(err);
     }
   });
 }
 
-export default nodeTransform;
+export default removeCss;

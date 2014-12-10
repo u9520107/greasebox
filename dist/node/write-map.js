@@ -16,12 +16,14 @@ var co = ($__co__ = require("co"), $__co__ && $__co__.__esModule && $__co__ || {
 var path = ($__path__ = require("path"), $__path__ && $__path__.__esModule && $__path__ || {default: $__path__}).default;
 var gutil = ($__gulp_45_util__ = require("gulp-util"), $__gulp_45_util__ && $__gulp_45_util__.__esModule && $__gulp_45_util__ || {default: $__gulp_45_util__}).default;
 function writeMap(root, ext) {
-  ext = ext || '.map';
+  if (!ext) {
+    ext = '.map';
+  }
   return through.obj(function(file, enc, cb) {
     if (file.isNull()) {
       cb();
     } else {
-      var sourceRoot = root || file.sourceMap.sourceRoot;
+      var sourceRoot = root ? root : file.sourceMap.sourceRoot;
       if (sourceRoot !== file.sourceMap.sourceRoot) {
         var nameCheck = new RegExp('^' + sourceRoot, 'i');
         file.sourceMap.sources = file.sourceMap.sources.map(function(name) {

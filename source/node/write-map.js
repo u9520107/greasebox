@@ -5,12 +5,14 @@ import path from 'path';
 import gutil from 'gulp-util';
 
 function writeMap(root, ext) {
-  ext = ext || '.map';
-  return through.obj(function(file, enc, cb) {
+  if(!ext) {
+    ext = '.map';
+  }
+  return through.obj(function(file, enc, next) {
     if (file.isNull()) {
-      cb();
-    } else {
-      var sourceRoot = root || file.sourceMap.sourceRoot;
+      return next();
+    } else if(file.sourceMap){
+      var sourceRoot = root ? root : file.sourceMap.sourceRoot;
 
       //replace
       if(sourceRoot !== file.sourceMap.sourceRoot) {
@@ -36,9 +38,10 @@ function writeMap(root, ext) {
       });
       this.push(file);
       this.push(mapFile);
-
-      cb();
+    } else {
+      this.push(file);
     }
+    next();
   });
 
 }

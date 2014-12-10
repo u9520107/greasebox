@@ -20,7 +20,7 @@
     "chai": "^1.10.0",
     "co-exec": "^1.1.0",
     "gulp": "^3.8.10",
-    "gulp-istanbul": "git://github.com/SBoudrias/gulp-istanbul#harmony",
+    "gulp-istanbul": "git://github.com/u9520107/gulp-istanbul#harmony",
     "gulp-mocha": "^2.0.0",
     "istanbul-traceur": "^1.0.7",
     "koa": "^0.13.0",

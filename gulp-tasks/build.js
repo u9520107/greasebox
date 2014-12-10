@@ -1,14 +1,25 @@
 var gulp = require('gulp');
 var path = require('path');
 var cp = require('child_process');
+var co = require('co');
 
-gulp.task('build-gulp-tools', function (cb) {
-  var nodeTransform = require(path.resolve(__dirname , '../dist/node/node-transform')).default;
-  var loadMap = require(path.resolve(__dirname, '../dist/node/load-map')).default;
-  var writeMap = require(path.resolve(__dirname, '../dist/node/write-map')).default;
+
+
+var traceurTransform = require(path.resolve(__dirname , '../dist/node/traceur-transform')).default;
+var removeCss = require(path.resolve(__dirname , '../dist/node/remove-css')).default;
+var loadMap = require(path.resolve(__dirname, '../dist/node/load-map')).default;
+var writeMap = require(path.resolve(__dirname, '../dist/node/write-map')).default;
+var rm = require(path.resolve(__dirname, '../dist/node/rm')).default;
+
+gulp.task('build-gulp-tools', ['clean'], function (cb) {
   gulp.src('source/node/*.js')
     .pipe(loadMap())
-    .pipe(nodeTransform())
+    .pipe(traceurTransform({
+      modules: 'commonjs',
+      generators: 'parse',
+      symbols: 'parse',
+      promises: 'parse'
+    }))
     .pipe(writeMap())
     .pipe(gulp.dest('dist/node'))
     .on('end', function () {
@@ -23,4 +34,11 @@ gulp.task('build-gulp-tools', function (cb) {
       p.on('exit', cb);
     });
 
+});
+
+gulp.task('clean', function (cb) {
+  co(function * (){
+    yield rm(path.resolve(__dirname, '../dist'));
+    cb();
+  });
 });
