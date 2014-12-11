@@ -8,11 +8,11 @@ var cofs = require('co-fs');
 var traceur = require('traceur');
 require(traceur.RUNTIME_PATH);
 
-var writeMap = require(path.resolve(__dirname, '../source/node/write-map')).default;
-var rm = require(path.resolve(__dirname, '../dist/node/rm')).default;
-var loadMap = require(path.resolve(__dirname, '../dist/node/load-map')).default;
-var traceurTransform = require(path.resolve(__dirname, '../dist/node/traceur-transform')).default;
-var jsxTransform = require(path.resolve(__dirname, '../dist/node/jsx-transform')).default;
+var writeMap = require(path.resolve(__dirname, '../source/write-map')).default;
+var rm = require(path.resolve(__dirname, '../dist/rm')).default;
+var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
+var traceurTransform = require(path.resolve(__dirname, '../dist/traceur-transform')).default;
+var jsxTransform = require(path.resolve(__dirname, '../dist/jsx-transform')).default;
 
 describe('writeMap', function() {
   it('should be a function', function () {

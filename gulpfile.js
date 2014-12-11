@@ -14,13 +14,13 @@ if(isHarmony) {
   });
 }
 
-gulp.task('build', (isHarmony ? ['build-gulp-tools'] : []), function () {
+gulp.task('build', (isHarmony ? ['harmony:build'] : []), function () {
   if(!isHarmony) {
     spawnTask('build');
   }
 });
 
-gulp.task('test', (isHarmony ? ['test-gulp-tools'] : []), function (cb) {
+gulp.task('test', (isHarmony ? ['harmony:test'] : []), function (cb) {
   if(!isHarmony) {
     spawnTask('test');
   }

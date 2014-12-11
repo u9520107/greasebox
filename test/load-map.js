@@ -8,8 +8,8 @@ var cofs = require('co-fs');
 var traceur = require('traceur');
 require(traceur.RUNTIME_PATH);
 
-var loadMap = require(path.resolve(__dirname, '../source/node/load-map')).default;
-var rm = require(path.resolve(__dirname, '../dist/node/rm')).default;
+var loadMap = require(path.resolve(__dirname, '../source/load-map')).default;
+var rm = require(path.resolve(__dirname, '../dist/rm')).default;
 
 describe('loadMap', function() {
   it('should be a function ', function () {
