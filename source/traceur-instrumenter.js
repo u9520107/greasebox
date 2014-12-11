@@ -1,7 +1,6 @@
 import istanbul from 'istanbul';
 import esprima from 'esprima';
 import sourceMap from 'source-map';
-import escodegen from 'escodegen';
 import traceur from 'traceur';
 import path from 'path';
 import fs from 'fs';
