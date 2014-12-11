@@ -13,7 +13,7 @@ var loadMap = require(path.resolve(__dirname, '../dist/node/load-map')).default;
 var writeMap = require(path.resolve(__dirname, '../dist/node/write-map')).default;
 var rm = require(path.resolve(__dirname, '../dist/node/rm')).default;
 
-gulp.task('build-gulp-tools', ['clean'], function (cb) {
+gulp.task('build-gulp-tools', ['test-gulp-tools'], function (cb) {
   gulp.src('source/node/*.js')
     .pipe(loadMap())
     .pipe(traceurTransform({
@@ -24,17 +24,7 @@ gulp.task('build-gulp-tools', ['clean'], function (cb) {
     }))
     .pipe(writeMap())
     .pipe(gulp.dest('dist/node'))
-    .on('end', function () {
-      //can't simply spawn gulp, breaks on windows (https://github.com/joyent/node/issues/2318)
-      var p = cp.spawn('node', ['--harmony', 'node_modules/gulp/bin/gulp', 'test'], {
-        stdio: 'inherit'
-      });
-      p.on('error', function (err) {
-        console.log(err);
-        cb();
-      });
-      p.on('exit', cb);
-    });
+    .on('end', cb);
 
 });
 
