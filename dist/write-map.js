@@ -25,7 +25,7 @@ function writeMap(root, ext) {
     } else if (file.sourceMap) {
       var sourceRoot = root ? root : file.sourceMap.sourceRoot;
       if (sourceRoot !== file.sourceMap.sourceRoot) {
-        var nameCheck = new RegExp('^' + sourceRoot, 'i');
+        var nameCheck = new RegExp('^' + escapeRegExp(sourceRoot));
         file.sourceMap.sources = file.sourceMap.sources.map(function(name) {
           if (name[0] !== '/' && name[0] !== '@') {
             return file.sourceMap.sourceRoot + name;
@@ -50,6 +50,9 @@ function writeMap(root, ext) {
     }
     next();
   });
+}
+function escapeRegExp(string) {
+  return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
 }
 var $__default = writeMap;
 

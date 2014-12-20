@@ -8,10 +8,10 @@ var cofs = require('co-fs');
 var traceur = require('traceur');
 require(traceur.RUNTIME_PATH);
 
-var jsxTransform = require(path.resolve(__dirname, '../source/node/jsx-transform')).default;
-var loadMap = require(path.resolve(__dirname, '../dist/node/load-map')).default;
-var writeMap = require(path.resolve(__dirname, '../dist/node/write-map')).default;
-var rm = require(path.resolve(__dirname, '../dist/node/rm')).default;
+var jsxTransform = require(path.resolve(__dirname, '../source/jsx-transform')).default;
+var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
+var writeMap = require(path.resolve(__dirname, '../dist/write-map')).default;
+var rm = require(path.resolve(__dirname, '../dist/rm')).default;
 
 describe('jsxTransform', function() {
   afterEach(function (cb) {

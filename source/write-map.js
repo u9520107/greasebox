@@ -16,7 +16,7 @@ function writeMap(root, ext) {
 
       //replace
       if(sourceRoot !== file.sourceMap.sourceRoot) {
-        var nameCheck = new RegExp('^' + sourceRoot, 'i');
+        var nameCheck = new RegExp('^' + escapeRegExp(sourceRoot));
         file.sourceMap.sources = file.sourceMap.sources.map(function (name) {
           if(name[0] !== '/' && name[0] !== '@') {
             return file.sourceMap.sourceRoot + name; 
@@ -44,6 +44,13 @@ function writeMap(root, ext) {
     next();
   });
 
+}
+
+/**
+ *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+ */
+function escapeRegExp(string){
+  return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
 }
 
 export default writeMap;

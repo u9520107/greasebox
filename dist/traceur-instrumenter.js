@@ -8,14 +8,12 @@ Object.defineProperties(exports, {
 var $__istanbul__,
     $__esprima__,
     $__source_45_map__,
-    $__escodegen__,
     $__traceur__,
     $__path__,
     $__fs__;
 var istanbul = ($__istanbul__ = require("istanbul"), $__istanbul__ && $__istanbul__.__esModule && $__istanbul__ || {default: $__istanbul__}).default;
 var esprima = ($__esprima__ = require("esprima"), $__esprima__ && $__esprima__.__esModule && $__esprima__ || {default: $__esprima__}).default;
 var sourceMap = ($__source_45_map__ = require("source-map"), $__source_45_map__ && $__source_45_map__.__esModule && $__source_45_map__ || {default: $__source_45_map__}).default;
-var escodegen = ($__escodegen__ = require("escodegen"), $__escodegen__ && $__escodegen__.__esModule && $__escodegen__ || {default: $__escodegen__}).default;
 var traceur = ($__traceur__ = require("traceur"), $__traceur__ && $__traceur__.__esModule && $__traceur__ || {default: $__traceur__}).default;
 var path = ($__path__ = require("path"), $__path__ && $__path__.__esModule && $__path__ || {default: $__path__}).default;
 var fs = ($__fs__ = require("fs"), $__fs__ && $__fs__.__esModule && $__fs__ || {default: $__fs__}).default;

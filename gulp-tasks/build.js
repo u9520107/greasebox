@@ -7,14 +7,14 @@ var traceur = require('traceur');
 require(traceur.RUNTIME_PATH);
 
 
-var traceurTransform = require(path.resolve(__dirname , '../dist/node/traceur-transform')).default;
-var removeCss = require(path.resolve(__dirname , '../dist/node/remove-css')).default;
-var loadMap = require(path.resolve(__dirname, '../dist/node/load-map')).default;
-var writeMap = require(path.resolve(__dirname, '../dist/node/write-map')).default;
-var rm = require(path.resolve(__dirname, '../dist/node/rm')).default;
+var traceurTransform = require(path.resolve(__dirname , '../dist/traceur-transform')).default;
+var removeCss = require(path.resolve(__dirname , '../dist/remove-css')).default;
+var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
+var writeMap = require(path.resolve(__dirname, '../dist/write-map')).default;
+var rm = require(path.resolve(__dirname, '../dist/rm')).default;
 
-gulp.task('build-gulp-tools', ['clean'], function (cb) {
-  gulp.src('source/node/*.js')
+gulp.task('harmony:build-tmp', ['harmony:test'], function (cb) {
+  gulp.src('source/*.js')
     .pipe(loadMap())
     .pipe(traceurTransform({
       modules: 'commonjs',
@@ -23,24 +23,28 @@ gulp.task('build-gulp-tools', ['clean'], function (cb) {
       promises: 'parse'
     }))
     .pipe(writeMap())
-    .pipe(gulp.dest('dist/node'))
-    .on('end', function () {
-      //can't simply spawn gulp, breaks on windows (https://github.com/joyent/node/issues/2318)
-      var p = cp.spawn('node', ['--harmony', 'node_modules/gulp/bin/gulp', 'test'], {
-        stdio: 'inherit'
-      });
-      p.on('error', function (err) {
-        console.log(err);
-        cb();
-      });
-      p.on('exit', cb);
-    });
-
+    .pipe(gulp.dest('build-tmp'))
+    .on('end', cb);
 });
 
-gulp.task('clean', function (cb) {
+gulp.task('harmony:copy-dist', ['harmony:build-tmp', 'harmony:clean-dist'], function (cb) {
+  gulp.src('build-tmp/*')
+    .pipe(gulp.dest('dist'))
+    .on('end', cb);
+});
+
+
+
+gulp.task('harmony:build', ['harmony:copy-dist', 'harmony:clean-tmp'], function () {});
+gulp.task('harmony:clean-dist', ['harmony:build-tmp'], function (cb) {
   co(function * (){
     yield rm(path.resolve(__dirname, '../dist'));
+    cb();
+  });
+});
+gulp.task('harmony:clean-tmp', ['harmony:copy-dist'], function (cb) {
+  co(function * (){
+    yield rm(path.resolve(__dirname, '../build-tmp'));
     cb();
   });
 });

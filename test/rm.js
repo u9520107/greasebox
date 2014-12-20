@@ -8,8 +8,8 @@ var cofs = require('co-fs');
 var traceur = require('traceur');
 require(traceur.RUNTIME_PATH);
 
-var rm = require(path.resolve(__dirname, '../source/node/rm')).default;
-var _rm = require(path.resolve(__dirname, '../dist/node/rm')).default;
+var rm = require(path.resolve(__dirname, '../source/rm')).default;
+var _rm = require(path.resolve(__dirname, '../dist/rm')).default;
 
 describe('rm', function() {
   before(function (cb) {
