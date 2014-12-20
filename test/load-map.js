@@ -27,7 +27,9 @@ describe('loadMap', function() {
   });
 
   it('should set the sourceMap property to files', function (cb) {
-    gulp.src(path.resolve(__dirname, 'files/a.js'))
+    gulp.src([path.resolve(__dirname, 'files/a.js'),
+      path.resolve(__dirname, 'files/style.styl')
+    ])
     .pipe(loadMap())
     .pipe(through.obj(function (file, enc, next){
       try {

@@ -8,6 +8,7 @@ import rm from './rm';
 import traceurInstrumenter from './traceur-instrumenter';
 import traceurTransform from './traceur-transform';
 import writeMap from './write-map';
+import stylusTransform from './stylus-transform';
 
 
 export {
@@ -17,5 +18,6 @@ export {
   rm,
   traceurInstrumenter,
   traceurTransform,
-  writeMap
+  writeMap,
+  stylusTransform 
 };

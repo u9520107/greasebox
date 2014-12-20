@@ -20,7 +20,7 @@ function loadMap(ext) {
         var map;
         try {
           if (
-            yield cofs.exists(mapFile)) {
+         yield cofs.exists(mapFile)) {
             map = JSON.parse(
               yield cofs.readFile(mapFile));
           } else {

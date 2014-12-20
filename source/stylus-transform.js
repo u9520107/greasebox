@@ -11,25 +11,29 @@ function stylusTransform() {
     try {
       if (file.isNull()) {
         return next();
-      } else if(file.path.match(/\.(styl)$/)){
-        
+      } else if(file.path.match(/\.styl$/)){
         var src = file.contents.toString(enc);
-        var renderer = new Renderer(src, {
-          filename: file.relative,
-          sourcemap: 'comment'
-        });
+        var useSourceMaps = !!file.sourceMap;
+        var opts = {
+          filename: file.relative
+        };
+        if(useSourceMaps) {
+          opts.sourcemap = 'comment';
+        }
+        var renderer = new Renderer(src, opts);
         var output = renderer.render();
-
         file.contents = new Buffer(output);
         if (file.sourceMap && renderer.sourcemap) {
-          var map = JSON.parse(renderer.sourcemap);
-
+          var map = renderer.sourcemap;
+          map.sourcesContent = [src];
           map.sourceRoot = file.buildStep;
+
           applyMap(file, map);
+          
           file.buildStep = '@stylus/';
 
         }
-        
+        file.path = file.path.replace(/\.styl$/, '.css');
         this.push(file);
       } else {
         this.push(file);

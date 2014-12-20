@@ -10,24 +10,30 @@ require(traceur.RUNTIME_PATH);
 
 
 var greasebox = require(path.resolve(__dirname, '../source/index'));
-var jsxTransform = require(path.resolve(__dirname, '../source/jsx-transform')).default;
-var loadMap = require(path.resolve(__dirname, '../source/load-map')).default;
-var removeCss = require(path.resolve(__dirname, '../source/remove-css')).default;
-var rm = require(path.resolve(__dirname, '../source/rm')).default;
-var traceurInstrumenter = require(path.resolve(__dirname, '../source/traceur-instrumenter')).default;
-var traceurTransform = require(path.resolve(__dirname, '../source/traceur-transform')).default;
-var writeMap = require(path.resolve(__dirname, '../source/write-map')).default;
 
-describe('greasebox', function () {
-  it('should contain all the modules', function () {
-    expect(greasebox).to.exist();
-    expect(greasebox.jsxTransform).to.equal(jsxTransform);
-    expect(greasebox.loadMap).to.equal(loadMap);
-    expect(greasebox.removeCss).to.equal(removeCss);
-    expect(greasebox.rm).to.equal(rm);
-    expect(greasebox.traceurInstrumenter).to.equal(traceurInstrumenter);
-    expect(greasebox.traceurTransform).to.equal(traceurTransform);
-    expect(greasebox.writeMap).to.equal(writeMap);
+describe('greasebox', function() {
+  it('should contain all the modules', function(cb) {
+    co(function*() {
+      var modules =
+        yield cofs.readdir(path.resolve(__dirname, '../source'));
+      for (var i = 0; i < modules.length; i++) {
+        if (modules[i].match(/\.js$/) && modules[i] !== 'index.js') {
+          var name = modules[i].split('.')[0];
+          name = name.split('-');
+          for (j = 1; j < name.length; j++) {
+            name[j] = name[j][0].toUpperCase() + name[j].substring(1);
+          }
+          name = name.join('');
+          if(!greasebox[name]) {
+            throw Error('module ' + name + ' is not found');
+          }
+        }
+      }
+    }).then(function () {
+      cb();
+    }).catch(function (err) {
+      cb(err);
+    });
   });
 
 });
