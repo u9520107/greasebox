@@ -18,9 +18,9 @@ gulp.task('harmony:build-tmp', ['harmony:test'], function (cb) {
     .pipe(loadMap())
     .pipe(traceurTransform({
       modules: 'commonjs',
-      //generators: 'parse',
-      //symbols: 'parse',
-      // promises: 'parse'
+      generators: 'parse',
+      symbols: 'parse',
+       promises: 'parse'
     }))
     .pipe(writeMap())
     .pipe(gulp.dest('build-tmp'))
