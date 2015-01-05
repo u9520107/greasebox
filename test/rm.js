@@ -3,13 +3,13 @@ var path = require('path');
 var gulp = require('gulp');
 var through = require('through2');
 var co = require('co');
-var cofs = require('co-fs');
 
 var traceur = require('traceur');
 require(traceur.RUNTIME_PATH);
 
 var rm = require(path.resolve(__dirname, '../source/rm')).default;
 var _rm = require(path.resolve(__dirname, '../dist/rm')).default;
+var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
 
 describe('rm', function() {
   before(function (cb) {
