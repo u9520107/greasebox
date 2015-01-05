@@ -20,7 +20,7 @@ gulp.task('harmony:build-tmp', ['harmony:test'], function (cb) {
       modules: 'commonjs',
       generators: 'parse',
       symbols: 'parse',
-       promises: 'parse'
+      promises: 'parse'
     }))
     .pipe(writeMap())
     .pipe(gulp.dest('build-tmp'))

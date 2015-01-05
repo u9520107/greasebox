@@ -24,6 +24,12 @@ Object.defineProperties(exports, {
   stylusTransform: {get: function() {
       return stylusTransform;
     }},
+  cofs: {get: function() {
+      return cofs;
+    }},
+  coStream: {get: function() {
+      return coStream;
+    }},
   __esModule: {value: true}
 });
 var $__traceur__,
@@ -34,7 +40,9 @@ var $__traceur__,
     $__traceur_45_instrumenter__,
     $__traceur_45_transform__,
     $__write_45_map__,
-    $__stylus_45_transform__;
+    $__stylus_45_transform__,
+    $__cofs__,
+    $__co_45_stream__;
 var traceur = ($__traceur__ = require("traceur"), $__traceur__ && $__traceur__.__esModule && $__traceur__ || {default: $__traceur__}).default;
 require(traceur.RUNTIME_PATH);
 var jsxTransform = ($__jsx_45_transform__ = require("./jsx-transform"), $__jsx_45_transform__ && $__jsx_45_transform__.__esModule && $__jsx_45_transform__ || {default: $__jsx_45_transform__}).default;
@@ -45,6 +53,8 @@ var traceurInstrumenter = ($__traceur_45_instrumenter__ = require("./traceur-ins
 var traceurTransform = ($__traceur_45_transform__ = require("./traceur-transform"), $__traceur_45_transform__ && $__traceur_45_transform__.__esModule && $__traceur_45_transform__ || {default: $__traceur_45_transform__}).default;
 var writeMap = ($__write_45_map__ = require("./write-map"), $__write_45_map__ && $__write_45_map__.__esModule && $__write_45_map__ || {default: $__write_45_map__}).default;
 var stylusTransform = ($__stylus_45_transform__ = require("./stylus-transform"), $__stylus_45_transform__ && $__stylus_45_transform__.__esModule && $__stylus_45_transform__ || {default: $__stylus_45_transform__}).default;
+var cofs = ($__cofs__ = require("./cofs"), $__cofs__ && $__cofs__.__esModule && $__cofs__ || {default: $__cofs__}).default;
+var coStream = ($__co_45_stream__ = require("./co-stream"), $__co_45_stream__ && $__co_45_stream__.__esModule && $__co_45_stream__ || {default: $__co_45_stream__}).default;
 ;
 
 //# sourceMappingURL=index.js.map

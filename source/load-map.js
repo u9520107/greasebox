@@ -1,5 +1,5 @@
 import through from 'through2';
-import cofs from 'co-fs';
+import cofs from './cofs';
 import co from 'co';
 import path from 'path';
 

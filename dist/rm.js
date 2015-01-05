@@ -5,9 +5,9 @@ Object.defineProperties(exports, {
     }},
   __esModule: {value: true}
 });
-var $__co_45_fs__,
+var $__cofs__,
     $__path__;
-var cofs = ($__co_45_fs__ = require("co-fs"), $__co_45_fs__ && $__co_45_fs__.__esModule && $__co_45_fs__ || {default: $__co_45_fs__}).default;
+var cofs = ($__cofs__ = require("./cofs"), $__cofs__ && $__cofs__.__esModule && $__cofs__ || {default: $__cofs__}).default;
 var path = ($__path__ = require("path"), $__path__ && $__path__.__esModule && $__path__ || {default: $__path__}).default;
 function* rm(filepath) {
   if (yield cofs.exists(filepath)) {

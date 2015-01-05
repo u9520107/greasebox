@@ -1,4 +1,4 @@
-import cofs from 'co-fs';
+import cofs from './cofs';
 import path from 'path';
 
 function *rm(filepath) {

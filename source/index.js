@@ -9,6 +9,8 @@ import traceurInstrumenter from './traceur-instrumenter';
 import traceurTransform from './traceur-transform';
 import writeMap from './write-map';
 import stylusTransform from './stylus-transform';
+import cofs from './cofs';
+import coStream from './co-stream';
 
 
 export {
@@ -19,5 +21,7 @@ export {
   traceurInstrumenter,
   traceurTransform,
   writeMap,
-  stylusTransform 
+  stylusTransform,
+  cofs,
+  coStream
 };
