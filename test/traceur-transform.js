@@ -3,7 +3,6 @@ var path = require('path');
 var gulp = require('gulp');
 var through = require('through2');
 var co = require('co');
-var cofs = require('co-fs');
 var recast = require('recast');
 
 
@@ -13,6 +12,7 @@ var traceurTransform = require(path.resolve(__dirname, '../source/traceur-transf
 var jsxTransform = require(path.resolve(__dirname, '../dist/jsx-transform')).default;
 var rm = require(path.resolve(__dirname, '../dist/rm')).default;
 var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
+var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
 
 describe('traceurTransform', function() {
   afterEach(function(cb) {

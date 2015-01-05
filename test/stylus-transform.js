@@ -3,7 +3,6 @@ var path = require('path');
 var gulp = require('gulp');
 var through = require('through2');
 var co = require('co');
-var cofs = require('co-fs');
 
 var traceur = require('traceur');
 require(traceur.RUNTIME_PATH);
@@ -11,6 +10,7 @@ require(traceur.RUNTIME_PATH);
 var stylusTransform = require(path.resolve(__dirname, '../source/stylus-transform')).default;
 var rm = require(path.resolve(__dirname, '../dist/rm')).default;
 var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
+var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
 
 describe('stylusTransform', function() {
   it('should be a function', function () {

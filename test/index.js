@@ -3,13 +3,13 @@ var path = require('path');
 var gulp = require('gulp');
 var through = require('through2');
 var co = require('co');
-var cofs = require('co-fs');
 
 var traceur = require('traceur');
 require(traceur.RUNTIME_PATH);
 
 
 var greasebox = require(path.resolve(__dirname, '../source/index'));
+var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
 
 describe('greasebox', function() {
   it('should contain all the modules', function(cb) {
