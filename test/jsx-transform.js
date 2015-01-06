@@ -12,6 +12,7 @@ var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
 var writeMap = require(path.resolve(__dirname, '../dist/write-map')).default;
 var rm = require(path.resolve(__dirname, '../dist/rm')).default;
 var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
+var _jsxTransform = require(path.resolve(__dirname, '../dist/jsx-transform')).default;
 
 describe('jsxTransform', function() {
   afterEach(function (cb) {
@@ -40,23 +41,38 @@ describe('jsxTransform', function() {
   });
 
   it('should process jsx files into js files', function(cb) {
+      var transformed;
+      var expected;
     gulp.src(path.resolve(__dirname, 'files/b.jsx'))
       .pipe(jsxTransform())
-      .pipe(gulp.dest(path.resolve(__dirname, 'tmp/jsx-transform')))
-      .on('end', function() {
-        co(function*() {
-          try {
-            var transformed = yield cofs.readFile(path.resolve(__dirname, 'tmp/jsx-transform/b.js'), 'utf8');
-            var expected = yield cofs.readFile(path.resolve(__dirname, 'files/b.js'), 'utf8');
-            expect(transformed).to.equal(expected);
-            cb();
-          } catch (err) {
-            cb(err);
-          }
-        });
+      .pipe(through.obj(function (file, enc, next) {
+            transformed = file.contents.toString(enc);
+            next();
+      }))
+      .on('finish', function () {
+        if(transformed) {
+            gulp.src(path.resolve(__dirname, 'files/b.jsx'))
+                .pipe(_jsxTransform())
+                .pipe(through.obj(function (file, enc, next) {
+                    expected = file.contents.toString(enc);
+                    next();
+                }))
+                .on('finish', function () {
+                    try {
+                        expect(transformed).to.equal(expected);
+                        cb();
+                    } catch(err) {
+                        cb(err);
+                    }
+                });
+
+        } else {
+            cb(new Error('file not transformed'));
+        }
+
       });
   });
-  
+
   it('should make changes to the sourceMap property', function (cb) {
     var original;
     gulp.src(path.resolve(__dirname, 'files/b.jsx'))
@@ -81,7 +97,7 @@ describe('jsxTransform', function() {
       })
       .on('finish', cb);
   });
-  
+
   it('should pass *.js files as original', function (cb) {
     gulp.src(path.resolve(__dirname, 'files/a.js'))
       .pipe(jsxTransform())
@@ -100,7 +116,7 @@ describe('jsxTransform', function() {
         });
       });
   });
-  
+
   it('should pass other files as original', function (cb) {
     gulp.src(path.resolve(__dirname, 'files/test.txt'))
       .pipe(jsxTransform())
@@ -109,7 +125,7 @@ describe('jsxTransform', function() {
         co(function*() {
           try {
             expect(yield cofs.exists(path.resolve(__dirname, 'tmp/jsx-transform/test.txt'))).to.equal(true);
-            
+
             var transformed = yield cofs.readFile(path.resolve(__dirname, 'tmp/jsx-transform/test.txt'), 'utf8');
             var expected = yield cofs.readFile(path.resolve(__dirname, 'files/test.txt'), 'utf8');
             expect(transformed).to.equal(expected);
@@ -120,7 +136,7 @@ describe('jsxTransform', function() {
         });
       });
   });
-  
+
   it('should throw error when parse fails', function (cb) {
     gulp.src(path.resolve(__dirname, 'files/c.jsx'))
       .pipe(jsxTransform())
@@ -134,28 +150,34 @@ describe('jsxTransform', function() {
   });
 
   it('should work with globs', function (cb) {
-    gulp.src(path.resolve(__dirname, 'files/glob/**/*'))
+      gulp.src(path.resolve(__dirname, 'files/glob/**/*'))
       .pipe(jsxTransform())
       .pipe(gulp.dest(path.resolve(__dirname, 'tmp/jsx-transform/glob')))
       .on('end', function () {
-        co(function * () {
-          try {
-            var globPath = path.resolve(__dirname, 'tmp/jsx-transform/glob');
-            expect(yield cofs.exists(path.resolve(globPath, 'd.js'))).to.equal(true);
-            expect(yield cofs.exists(path.resolve(globPath, 'nest/e.js'))).to.equal(true);
+          gulp.src(path.resolve(__dirname, 'files/glob/**/*'))
+          .pipe(_jsxTransform())
+          .pipe(gulp.dest(path.resolve(__dirname, 'tmp/jsx-transform/glob-expected')))
+          .on('end', function () {
+              co(function * () {
+                  try {
+                      var globPath = path.resolve(__dirname, 'tmp/jsx-transform/glob');
+                      expect(yield cofs.exists(path.resolve(globPath, 'd.js'))).to.equal(true);
+                      expect(yield cofs.exists(path.resolve(globPath, 'nest/e.js'))).to.equal(true);
 
-            var expected = yield cofs.readFile(path.resolve(__dirname, 'files/b.js'), 'utf8');
-            expect(yield cofs.readFile(path.resolve(globPath, 'd.js'), 'utf8')).to.equal(expected);
-            expect(yield cofs.readFile(path.resolve(globPath, 'nest/e.js'), 'utf8')).to.equal(expected);
+                      var expected = yield cofs.readFile(path.resolve(__dirname, 'tmp/jsx-transform/glob-expected/d.js'), 'utf8');
+                      expect(yield cofs.readFile(path.resolve(globPath, 'd.js'), 'utf8')).to.equal(expected);
+                      expect(yield cofs.readFile(path.resolve(globPath, 'nest/e.js'), 'utf8')).to.equal(expected);
 
-            cb();
-          } catch(err) {
-            cb(err);
-          }
-        });
+                      cb();
+                  } catch(err) {
+                      cb(err);
+                  }
+
+              });
+
+          });
 
       });
-  
   });
 
 });
