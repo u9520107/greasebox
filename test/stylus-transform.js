@@ -11,6 +11,7 @@ var stylusTransform = require(path.resolve(__dirname, '../source/stylus-transfor
 var rm = require(path.resolve(__dirname, '../dist/rm')).default;
 var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
 var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
+var _stylusTransform = require(path.resolve(__dirname, '../dist/stylus-transform')).default;
 
 describe('stylusTransform', function() {
   it('should be a function', function () {
@@ -24,23 +25,31 @@ describe('stylusTransform', function() {
   });
 
   it('should compile stylus into css', function (cb) {
+      var expected, transformed;
     gulp.src(path.resolve(__dirname, 'files/style.styl'))
       .pipe(stylusTransform())
       .pipe(through.obj(function (file, enc, next){
-        co(function * () {
-          var transformed = file.contents.toString(enc);
-          var expected = yield cofs.readFile(path.resolve(__dirname, 'files/style.css'), 'utf8');
-          try {
-            expect(/\.css$/.test(file.path)).to.equal(true);
-            expect(transformed).to.equal(expected);
-            next();
-          } catch (err) {
-            next(err);
-          }
-        });
+          transformed = file.contents.toString(enc);
+          next();
       }))
       .on('finish', function () {
-        cb();
+          gulp.src(path.resolve(__dirname, 'files/style.styl'))
+          .pipe(_stylusTransform())
+          .pipe(through.obj(function (file, enc, next) {
+            expected = file.contents.toString(enc);
+            next();
+          }))
+          .on('finish', function () {
+                try {
+                    expect(transformed).to.equal(expected);
+                    cb();
+                } catch (err) {
+                    cb(err);
+                }
+          })
+          .on('error', function (err) {
+            cb(err);
+          });
       })
       .on('error', function (err) {
         cb(err);
@@ -68,41 +77,52 @@ describe('stylusTransform', function() {
       .on('error', function (err) {
         cb(err);
       });
-  
+
   });
 
   it('should work with globs', function (cb) {
-    var pass = false;
-    gulp.src(path.resolve(__dirname, 'files/glob/**'))
-      .pipe(stylusTransform())
-      .pipe(through.obj(function (file, enc, next){
-        if(file.path.match(/\.css$/)) {
-          co(function * () {
-            var transformed = file.contents.toString(enc);
-            var expected = yield cofs.readFile(path.resolve(__dirname, 'files/style.css'), 'utf8');
-            try {
-              expect(transformed).to.equal(expected);
-              pass = true;
-              next();
-            } catch (err) {
-              next(err);
-            }
-          });
-        } else {
+      var pass = false, expected;
+      gulp.src(path.resolve(__dirname, 'files/style.styl'))
+      .pipe(_stylusTransform())
+      .pipe(through.obj(function (file, enc, next) {
+          expected = file.contents.toString(enc);
           next();
-        }
-
       }))
       .on('finish', function () {
-        if(!pass) {
-          return cb(new Error('compiled file not found'));
-        }
-        cb();
+          gulp.src(path.resolve(__dirname, 'files/glob/**'))
+          .pipe(stylusTransform())
+          .pipe(through.obj(function (file, enc, next){
+              if(file.path.match(/\.css$/)) {
+                  co(function * () {
+                      var transformed = file.contents.toString(enc);
+                      try {
+                          expect(transformed).to.equal(expected);
+                          pass = true;
+                          next();
+                      } catch (err) {
+                          next(err);
+                      }
+                  });
+              } else {
+                  next();
+              }
+
+          }))
+          .on('finish', function () {
+              if(!pass) {
+                  return cb(new Error('compiled file not found'));
+              }
+              cb();
+          })
+          .on('error', function (err) {
+              cb(err);
+          });
+
       })
       .on('error', function (err) {
-        cb(err);
+          cb(err);
       });
-     
+
   });
 
   it('should catch errors', function (cb) {
@@ -119,7 +139,7 @@ describe('stylusTransform', function() {
           cb(e);
         }
       });
-  
+
   });
 
   it('should generate sourcemaps', function (cb) {
@@ -148,8 +168,8 @@ describe('stylusTransform', function() {
       .on('error', function (err) {
         cb(err);
       });
-  
-  
+
+
   });
 
 });
