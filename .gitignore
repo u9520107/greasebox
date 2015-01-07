@@ -32,3 +32,6 @@ node_modules
 *.swp
 *.swo
 *.*~
+
+#macos
+.DS_STORE

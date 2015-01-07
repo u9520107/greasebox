@@ -6,7 +6,7 @@ var fs = require('fs');
 var isHarmony = process.execArgv.indexOf('--harmony') > -1;
 
 //load tasks if harmony flag is on
-if(isHarmony) {
+if(isHarmony && fs.existsSync('gulp-tasks')) {
   fs.readdirSync('gulp-tasks').forEach(function(task) {
     if(/^[A-za-z].*\.js$/i.test(task)) {
       require(path.resolve(__dirname, 'gulp-tasks', task));
