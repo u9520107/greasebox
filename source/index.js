@@ -11,10 +11,12 @@ import writeMap from './write-map';
 import stylusTransform from './stylus-transform';
 import cofs from './cofs';
 import coStream from './co-stream';
+import jsxFormatter from './jsx-formatter';
 
 
 export {
   jsxTransform,
+  jsxFormatter,
   loadMap,
   removeCss,
   rm,

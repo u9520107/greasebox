@@ -1,5 +1,5 @@
 import istanbul from 'istanbul';
-import esprima from 'esprima';
+import esprima from 'esprima-fb';
 import sourceMap from 'source-map';
 import traceur from 'traceur';
 import path from 'path';
@@ -63,7 +63,8 @@ class TraceurInstrumenter extends istanbul.Instrumenter {
 
     var program = esprima.parse(code, {
       loc: true,
-      range: true
+      range: true,
+      sourceType: 'module'
     });
     return program;
   }
