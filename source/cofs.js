@@ -1,12 +1,9 @@
 import thunkify from 'thunkify';
 import fs from 'fs';
 import coStream from './co-stream';
-
 /**
  *  cofs module derives from tj/co-fs.
  */
-
-
 var methods = [
   'rename',
   'ftruncate',
@@ -37,15 +34,12 @@ var methods = [
   'writeFile',
   'appendFile'
 ];
-
 var cofs = {};
-
 methods.forEach(function (name) {
-  if(fs[name]) {
+  if (fs[name]) {
     cofs[name] = thunkify(fs[name]);
   }
 });
-
 cofs.exists = function (path) {
   return function (done) {
     fs.stat(path, function (err, res) {
@@ -53,10 +47,7 @@ cofs.exists = function (path) {
     });
   };
 };
-
 cofs.createReadStream = function () {
   return coStream(fs.createReadStream.apply(null, arguments));
 };
-
-
 export default cofs;

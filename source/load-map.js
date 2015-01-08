@@ -2,27 +2,24 @@ import through from 'through2';
 import cofs from './cofs';
 import co from 'co';
 import path from 'path';
-
 /**
  * @function loadMap
  */
 function loadMap(ext) {
-  if(!ext) {
+  if (!ext) {
     ext = '.map';
   }
-  return through.obj(function(file, enc, next) {
+  return through.obj(function (file, enc, next) {
     if (file.isNull()) {
       next();
     } else {
       var self = this;
-      co(function*() {
+      co(function* () {
         var mapFile = file.path + ext;
         var map;
         try {
-          if (
-         yield cofs.exists(mapFile)) {
-            map = JSON.parse(
-              yield cofs.readFile(mapFile));
+          if (yield cofs.exists(mapFile)) {
+            map = JSON.parse(yield cofs.readFile(mapFile));
           } else {
             map = {
               version: 3,
@@ -44,6 +41,4 @@ function loadMap(ext) {
     }
   });
 }
-
-export
-default loadMap;
+export default loadMap;

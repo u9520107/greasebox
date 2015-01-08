@@ -2,20 +2,17 @@ import reactTools from 'react-tools';
 import through from 'through2';
 import applyMap from 'vinyl-sourcemaps-apply';
 import debug from 'debug';
-
 var log = debug('transform:jsx');
-
 /**
  *  @function jsxTransform
  *
  */
 function jsxTransform() {
-  return through.obj(function(file, enc, next) {
+  return through.obj(function (file, enc, next) {
     try {
       var useSourceMap = !!file.sourceMap;
-
       //skip regular js files
-      if(file.isNull()) {
+      if (file.isNull()) {
         return next();
       } else if (file.path.match(/\.jsx$/i)) {
         var source = file.contents.toString(enc);
@@ -25,7 +22,6 @@ function jsxTransform() {
           harmony: true
         });
         file.contents = new Buffer(output.code);
-
         if (useSourceMap) {
           //manually add sourcemap information
           output.sourceMap.sources = [file.relative];
@@ -44,6 +40,4 @@ function jsxTransform() {
     }
   });
 }
-
-export
-default jsxTransform;
+export default jsxTransform;

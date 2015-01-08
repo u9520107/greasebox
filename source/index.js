@@ -1,6 +1,5 @@
 import traceur from 'traceur';
 require(traceur.RUNTIME_PATH);
-
 import jsxTransform from './jsx-transform';
 import loadMap from './load-map';
 import removeCss from './remove-css';
@@ -12,8 +11,6 @@ import stylusTransform from './stylus-transform';
 import cofs from './cofs';
 import coStream from './co-stream';
 import jsxFormatter from './jsx-formatter';
-
-
 export {
   jsxTransform,
   jsxFormatter,
