@@ -2,6 +2,11 @@ import through from 'through2';
 import esp from 'esprima-fb';
 import cofs from './cofs';
 import esc from 'escodegen-jsx';
+/**
+ *  Experimental feature
+ *    escodegen-jsx is a fork of escodegen, not sure if it will be actively maintained.
+ *    ng-vu/escodegen-jsx does not have issue tracker.
+ */
 const DEFAULT_FORMATTER_OPTIONS = {
   indent: {
     style: ' ',
