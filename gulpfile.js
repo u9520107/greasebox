@@ -20,9 +20,15 @@ gulp.task('build', (isHarmony ? ['harmony:build'] : []), function () {
   }
 });
 
-gulp.task('test', (isHarmony ? ['harmony:test'] : []), function (cb) {
+gulp.task('test', (isHarmony ? ['harmony:test'] : []), function () {
   if(!isHarmony) {
     spawnTask('test');
+  }
+});
+
+gulp.task('format', (isHarmony ? ['harmony:format'] : []), function (cb) {
+  if(!isHarmony) {
+    spawnTask('format');
   }
 });
 

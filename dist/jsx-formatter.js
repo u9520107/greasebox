@@ -22,6 +22,7 @@ function jsxFormatter(options) {
     var src = file.contents.toString(enc);
     try {
       var ast = esp.parse(src, {
+        sourceType: 'module',
         range: true,
         comment: true,
         tokens: true
