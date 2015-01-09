@@ -33,6 +33,12 @@ Object.defineProperties(exports, {
   coStream: {get: function() {
       return coStream;
     }},
+  coForeach: {get: function() {
+      return coForeach;
+    }},
+  coMap: {get: function() {
+      return coMap;
+    }},
   __esModule: {value: true}
 });
 var $__traceur__,
@@ -46,7 +52,9 @@ var $__traceur__,
     $__stylus_45_transform__,
     $__cofs__,
     $__co_45_stream__,
-    $__jsx_45_formatter__;
+    $__jsx_45_formatter__,
+    $__co_45_foreach__,
+    $__co_45_map__;
 var traceur = ($__traceur__ = require("traceur"), $__traceur__ && $__traceur__.__esModule && $__traceur__ || {default: $__traceur__}).default;
 require(traceur.RUNTIME_PATH);
 var jsxTransform = ($__jsx_45_transform__ = require("./jsx-transform"), $__jsx_45_transform__ && $__jsx_45_transform__.__esModule && $__jsx_45_transform__ || {default: $__jsx_45_transform__}).default;
@@ -60,6 +68,8 @@ var stylusTransform = ($__stylus_45_transform__ = require("./stylus-transform"),
 var cofs = ($__cofs__ = require("./cofs"), $__cofs__ && $__cofs__.__esModule && $__cofs__ || {default: $__cofs__}).default;
 var coStream = ($__co_45_stream__ = require("./co-stream"), $__co_45_stream__ && $__co_45_stream__.__esModule && $__co_45_stream__ || {default: $__co_45_stream__}).default;
 var jsxFormatter = ($__jsx_45_formatter__ = require("./jsx-formatter"), $__jsx_45_formatter__ && $__jsx_45_formatter__.__esModule && $__jsx_45_formatter__ || {default: $__jsx_45_formatter__}).default;
+var coForeach = ($__co_45_foreach__ = require("./co-foreach"), $__co_45_foreach__ && $__co_45_foreach__.__esModule && $__co_45_foreach__ || {default: $__co_45_foreach__}).default;
+var coMap = ($__co_45_map__ = require("./co-map"), $__co_45_map__ && $__co_45_map__.__esModule && $__co_45_map__ || {default: $__co_45_map__}).default;
 ;
 
 //# sourceMappingURL=index.js.map
