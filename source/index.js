@@ -11,6 +11,9 @@ import stylusTransform from './stylus-transform';
 import cofs from './cofs';
 import coStream from './co-stream';
 import jsxFormatter from './jsx-formatter';
+import coForeach from './co-foreach';
+import coMap from './co-map';
+
 export {
   jsxTransform,
   jsxFormatter,
@@ -22,5 +25,7 @@ export {
   writeMap,
   stylusTransform,
   cofs,
-  coStream
+  coStream,
+  coForeach,
+  coMap
 };
