@@ -33,6 +33,7 @@ function traceurTransform(opts = {}) {
       }
       cb();
     } catch (err) {
+      console.log('Error transforming %s', file.path);
       cb(err);
     }
   });

@@ -48,7 +48,7 @@ function writeMap(root, ext) {
   });
 }
 function escapeRegExp(string) {
-  return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
+  return string.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
 }
 var $__default = writeMap;
 

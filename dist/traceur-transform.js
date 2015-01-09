@@ -44,6 +44,7 @@ function traceurTransform() {
       }
       cb();
     } catch (err) {
+      console.log('Error transforming %s', file.path);
       cb(err);
     }
   });
