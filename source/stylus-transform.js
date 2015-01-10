@@ -1,6 +1,7 @@
 import through from 'through2';
 import Renderer from 'stylus/lib/renderer';
 import applyMap from 'vinyl-sourcemaps-apply';
+import path from 'path';
 /**
  * @function
  *
@@ -13,7 +14,7 @@ function stylusTransform() {
       } else if (file.path.match(/\.styl$/)) {
         var src = file.contents.toString(enc);
         var useSourceMaps = !!file.sourceMap;
-        var opts = { filename: file.relative };
+        var opts = { filename: path.basename(file.name) };
         if (useSourceMaps) {
           opts.sourcemap = 'comment';
         }
