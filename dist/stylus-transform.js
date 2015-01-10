@@ -21,7 +21,7 @@ function stylusTransform() {
       } else if (file.path.match(/\.styl$/)) {
         var src = file.contents.toString(enc);
         var useSourceMaps = !!file.sourceMap;
-        var opts = {filename: path.basename(file.name)};
+        var opts = {filename: path.basename(file.path)};
         if (useSourceMaps) {
           opts.sourcemap = 'comment';
         }
