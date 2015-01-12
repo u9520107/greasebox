@@ -8,11 +8,13 @@ Object.defineProperties(exports, {
 var $__react_45_tools__,
     $__through2__,
     $__vinyl_45_sourcemaps_45_apply__,
-    $__debug__;
+    $__debug__,
+    $__chalk__;
 var reactTools = ($__react_45_tools__ = require("react-tools"), $__react_45_tools__ && $__react_45_tools__.__esModule && $__react_45_tools__ || {default: $__react_45_tools__}).default;
 var through = ($__through2__ = require("through2"), $__through2__ && $__through2__.__esModule && $__through2__ || {default: $__through2__}).default;
 var applyMap = ($__vinyl_45_sourcemaps_45_apply__ = require("vinyl-sourcemaps-apply"), $__vinyl_45_sourcemaps_45_apply__ && $__vinyl_45_sourcemaps_45_apply__.__esModule && $__vinyl_45_sourcemaps_45_apply__ || {default: $__vinyl_45_sourcemaps_45_apply__}).default;
 var debug = ($__debug__ = require("debug"), $__debug__ && $__debug__.__esModule && $__debug__ || {default: $__debug__}).default;
+var chalk = ($__chalk__ = require("chalk"), $__chalk__ && $__chalk__.__esModule && $__chalk__ || {default: $__chalk__}).default;
 var log = debug('transform:jsx');
 function jsxTransform() {
   return through.obj(function(file, enc, next) {
@@ -41,6 +43,7 @@ function jsxTransform() {
       }
       next();
     } catch (err) {
+      console.log(("[" + chalk.cyan('jsxTransform') + "] Failed to transform " + chalk.red(file.path)));
       next(err);
     }
   });

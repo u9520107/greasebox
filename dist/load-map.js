@@ -8,11 +8,13 @@ Object.defineProperties(exports, {
 var $__through2__,
     $__cofs__,
     $__co__,
-    $__path__;
+    $__path__,
+    $__chalk__;
 var through = ($__through2__ = require("through2"), $__through2__ && $__through2__.__esModule && $__through2__ || {default: $__through2__}).default;
 var cofs = ($__cofs__ = require("./cofs"), $__cofs__ && $__cofs__.__esModule && $__cofs__ || {default: $__cofs__}).default;
 var co = ($__co__ = require("co"), $__co__ && $__co__.__esModule && $__co__ || {default: $__co__}).default;
 var path = ($__path__ = require("path"), $__path__ && $__path__.__esModule && $__path__ || {default: $__path__}).default;
+var chalk = ($__chalk__ = require("chalk"), $__chalk__ && $__chalk__.__esModule && $__chalk__ || {default: $__chalk__}).default;
 function loadMap(ext) {
   if (!ext) {
     ext = '.map';
@@ -43,6 +45,7 @@ function loadMap(ext) {
           self.push(file);
           next();
         } catch (err) {
+          console.log(("[" + chalk.cyan('loadMap') + "] Failed to load source map for " + chalk.red(file.path)));
           next(err);
         }
       });

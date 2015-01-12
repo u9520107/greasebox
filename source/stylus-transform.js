@@ -2,6 +2,7 @@ import through from 'through2';
 import Renderer from 'stylus/lib/renderer';
 import applyMap from 'vinyl-sourcemaps-apply';
 import path from 'path';
+import chalk from 'chalk';
 /**
  * @function
  *
@@ -35,6 +36,7 @@ function stylusTransform() {
       }
       next();
     } catch (err) {
+      console.log(`[${ chalk.cyan( 'stylusTransform' ) }] Failed to transform ${chalk.red( file.path )}`);
       next(err);
     }
   });

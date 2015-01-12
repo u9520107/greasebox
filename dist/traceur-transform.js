@@ -7,10 +7,12 @@ Object.defineProperties(exports, {
 });
 var $__through2__,
     $__traceur__,
-    $__vinyl_45_sourcemaps_45_apply__;
+    $__vinyl_45_sourcemaps_45_apply__,
+    $__chalk__;
 var through = ($__through2__ = require("through2"), $__through2__ && $__through2__.__esModule && $__through2__ || {default: $__through2__}).default;
 var traceur = ($__traceur__ = require("traceur"), $__traceur__ && $__traceur__.__esModule && $__traceur__ || {default: $__traceur__}).default;
 var applyMap = ($__vinyl_45_sourcemaps_45_apply__ = require("vinyl-sourcemaps-apply"), $__vinyl_45_sourcemaps_45_apply__ && $__vinyl_45_sourcemaps_45_apply__.__esModule && $__vinyl_45_sourcemaps_45_apply__ || {default: $__vinyl_45_sourcemaps_45_apply__}).default;
+var chalk = ($__chalk__ = require("chalk"), $__chalk__ && $__chalk__.__esModule && $__chalk__ || {default: $__chalk__}).default;
 var DEFAULT_TRACEUR_OPTIONS = {modules: 'commonjs'};
 function traceurTransform() {
   var opts = arguments[0] !== (void 0) ? arguments[0] : {};
@@ -44,7 +46,7 @@ function traceurTransform() {
       }
       cb();
     } catch (err) {
-      console.log('Error transforming %s', file.path);
+      console.log(("[" + chalk.cyan('traceurTransform') + "] Failed to transform " + chalk.red(file.path)));
       cb(err);
     }
   });

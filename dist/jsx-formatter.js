@@ -8,11 +8,13 @@ Object.defineProperties(exports, {
 var $__through2__,
     $__esprima_45_fb__,
     $__cofs__,
-    $__escodegen_45_jsx__;
+    $__escodegen_45_jsx__,
+    $__chalk__;
 var through = ($__through2__ = require("through2"), $__through2__ && $__through2__.__esModule && $__through2__ || {default: $__through2__}).default;
 var esp = ($__esprima_45_fb__ = require("esprima-fb"), $__esprima_45_fb__ && $__esprima_45_fb__.__esModule && $__esprima_45_fb__ || {default: $__esprima_45_fb__}).default;
 var cofs = ($__cofs__ = require("./cofs"), $__cofs__ && $__cofs__.__esModule && $__cofs__ || {default: $__cofs__}).default;
 var esc = ($__escodegen_45_jsx__ = require("escodegen-jsx"), $__escodegen_45_jsx__ && $__escodegen_45_jsx__.__esModule && $__escodegen_45_jsx__ || {default: $__escodegen_45_jsx__}).default;
+var chalk = ($__chalk__ = require("chalk"), $__chalk__ && $__chalk__.__esModule && $__chalk__ || {default: $__chalk__}).default;
 var DEFAULT_FORMATTER_OPTIONS = {indent: {
     style: ' ',
     base: 0
@@ -39,6 +41,7 @@ function jsxFormatter(options) {
       this.push(file);
       next();
     } catch (err) {
+      console.log(("[" + chalk.cyan('jsxFormatter') + "] Failed to transform " + chalk.red(filepath)));
       next(err);
     }
   });

@@ -2,6 +2,7 @@ import through from 'through2';
 import esp from 'esprima-fb';
 import cofs from './cofs';
 import esc from 'escodegen-jsx';
+import chalk from 'chalk';
 /**
  *  Experimental feature
  *    escodegen-jsx is a fork of escodegen, not sure if it will be actively maintained.
@@ -37,6 +38,7 @@ function jsxFormatter(options) {
       this.push(file);
       next();
     } catch (err) {
+      console.log(`[${chalk.cyan('jsxFormatter')}] Failed to transform ${chalk.red(filepath)}`);
       next(err);
     }
   });

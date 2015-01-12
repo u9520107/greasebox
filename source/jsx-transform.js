@@ -2,6 +2,8 @@ import reactTools from 'react-tools';
 import through from 'through2';
 import applyMap from 'vinyl-sourcemaps-apply';
 import debug from 'debug';
+import chalk from 'chalk';
+
 var log = debug('transform:jsx');
 /**
  *  @function jsxTransform
@@ -36,6 +38,7 @@ function jsxTransform() {
       }
       next();
     } catch (err) {
+      console.log(`[${chalk.cyan('jsxTransform')}] Failed to transform ${chalk.red(file.path)}`);
       next(err);
     }
   });

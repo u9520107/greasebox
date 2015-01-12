@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "greasebox\r =========",
   "main": "dist/index.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "mocha": "^2.0.1"
   },
   "dependencies": {
+    "chalk": "^0.5.1",
     "co": "^4.0.1",
     "co-read": "^0.1.1",
     "debug": "^2.1.0",

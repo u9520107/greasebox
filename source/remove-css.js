@@ -1,6 +1,7 @@
 import through from 'through2';
 import recast from 'recast';
 import applyMap from 'vinyl-sourcemaps-apply';
+import chalk from 'chalk';
 /**
  * @function
  *
@@ -34,6 +35,7 @@ function removeCss() {
       }
       next();
     } catch (err) {
+      console.log(`[${ chalk.cyan( 'removeCss' ) }] Failed to transform ${chalk.red( file.path )}`);
       next(err);
     }
   });

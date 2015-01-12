@@ -2,6 +2,8 @@ import through from 'through2';
 import cofs from './cofs';
 import co from 'co';
 import path from 'path';
+import chalk from 'chalk';
+
 /**
  * @function loadMap
  */
@@ -35,6 +37,7 @@ function loadMap(ext) {
           self.push(file);
           next();
         } catch (err) {
+          console.log(`[${ chalk.cyan( 'loadMap' ) }] Failed to load source map for ${chalk.red( file.path )}`);
           next(err);
         }
       });

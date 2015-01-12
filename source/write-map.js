@@ -1,6 +1,8 @@
 import through from 'through2';
 import path from 'path';
 import gutil from 'gulp-util';
+import chalk from 'chalk';
+
 function writeMap(root, ext) {
   if (!ext) {
     ext = '.map';
@@ -33,6 +35,7 @@ function writeMap(root, ext) {
       this.push(file);
       this.push(mapFile);
     } else {
+      console.log(`[${chalk.cyan('writeMap')}] Failed to write sourcemap for ${chalk.red( file.path )}`);
       this.push(file);
     }
     next();

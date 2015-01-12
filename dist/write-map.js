@@ -7,10 +7,12 @@ Object.defineProperties(exports, {
 });
 var $__through2__,
     $__path__,
-    $__gulp_45_util__;
+    $__gulp_45_util__,
+    $__chalk__;
 var through = ($__through2__ = require("through2"), $__through2__ && $__through2__.__esModule && $__through2__ || {default: $__through2__}).default;
 var path = ($__path__ = require("path"), $__path__ && $__path__.__esModule && $__path__ || {default: $__path__}).default;
 var gutil = ($__gulp_45_util__ = require("gulp-util"), $__gulp_45_util__ && $__gulp_45_util__.__esModule && $__gulp_45_util__ || {default: $__gulp_45_util__}).default;
+var chalk = ($__chalk__ = require("chalk"), $__chalk__ && $__chalk__.__esModule && $__chalk__ || {default: $__chalk__}).default;
 function writeMap(root, ext) {
   if (!ext) {
     ext = '.map';
@@ -42,6 +44,7 @@ function writeMap(root, ext) {
       this.push(file);
       this.push(mapFile);
     } else {
+      console.log(("[" + chalk.cyan('writeMap') + "] Failed to write sourcemap for " + chalk.red(file.path)));
       this.push(file);
     }
     next();

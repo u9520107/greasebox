@@ -1,6 +1,7 @@
 import through from 'through2';
 import traceur from 'traceur';
 import applyMap from 'vinyl-sourcemaps-apply';
+import chalk from 'chalk';
 const DEFAULT_TRACEUR_OPTIONS = { modules: 'commonjs' };
 function traceurTransform(opts = {}) {
   for (var key in DEFAULT_TRACEUR_OPTIONS) {
@@ -33,7 +34,7 @@ function traceurTransform(opts = {}) {
       }
       cb();
     } catch (err) {
-      console.log('Error transforming %s', file.path);
+      console.log(`[${ chalk.cyan( 'traceurTransform' ) }] Failed to transform ${chalk.red( file.path )}`);
       cb(err);
     }
   });
