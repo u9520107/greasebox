@@ -21,7 +21,8 @@ function jsxTransform() {
         var output = reactTools.transformWithDetails(source, {
           sourceMap: useSourceMap,
           filename: file.relative.replace(/\.jsx$/i, '.js'),
-          harmony: true
+          harmony: true,
+          es5: true
         });
         file.contents = new Buffer(output.code);
         if (useSourceMap) {
