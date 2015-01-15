@@ -26,13 +26,6 @@ gulp.task('test', (isHarmony ? ['harmony:test'] : []), function () {
   }
 });
 
-gulp.task('format', (isHarmony ? ['harmony:format'] : []), function (cb) {
-  if(!isHarmony) {
-    spawnTask('format');
-  }
-});
-
-
 function spawnTask(task) {
   return cp.spawn('node', ['--harmony', 'node_modules/gulp/bin/gulp.js', task], {
     stdio: 'inherit'

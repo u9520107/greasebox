@@ -4,12 +4,10 @@ var gulp = require('gulp');
 var through = require('through2');
 var co = require('co');
 
-var traceur = require('traceur');
-require(traceur.RUNTIME_PATH);
 
-var rm = require(path.resolve(__dirname, '../source/rm')).default;
-var _rm = require(path.resolve(__dirname, '../dist/rm')).default;
-var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
+var rm = require(path.resolve(__dirname, '../source/rm'));
+var _rm = require(path.resolve(__dirname, '../dist/rm'));
+var cofs = require(path.resolve(__dirname, '../dist/cofs'));
 
 describe('rm', function() {
   before(function (cb) {
@@ -83,7 +81,7 @@ describe('rm', function() {
       } catch (err) {
         cb(err);
       }
-    
+
     });
   });
 });

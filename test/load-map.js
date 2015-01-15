@@ -4,12 +4,10 @@ var gulp = require('gulp');
 var through = require('through2');
 var co = require('co');
 
-var traceur = require('traceur');
-require(traceur.RUNTIME_PATH);
 
-var loadMap = require(path.resolve(__dirname, '../source/load-map')).default;
-var rm = require(path.resolve(__dirname, '../dist/rm')).default;
-var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
+var loadMap = require(path.resolve(__dirname, '../source/load-map'));
+var rm = require(path.resolve(__dirname, '../dist/rm'));
+var cofs = require(path.resolve(__dirname, '../dist/cofs'));
 
 describe('loadMap', function() {
   it('should be a function ', function () {
@@ -19,7 +17,7 @@ describe('loadMap', function() {
   it('should accept 1 parameter', function () {
     expect(loadMap.length).to.be.equal(1);
   });
-  
+
   it('should return an stream-reader', function() {
     obj = loadMap();
     expect(obj).to.be.a('object');
@@ -44,7 +42,7 @@ describe('loadMap', function() {
     })
     .on('finish', cb);
   });
-  
+
   it('should read from source map files', function (cb) {
     gulp.src(path.resolve(__dirname, 'files/sourcemap/a.js'))
     .pipe(loadMap())
@@ -62,7 +60,7 @@ describe('loadMap', function() {
     })
     .on('finish', cb);
   });
-  
+
   it('should work with custom extensions', function (cb) {
     gulp.src(path.resolve(__dirname, 'files/sourcemap/c.js'))
     .pipe(loadMap('.something'))
@@ -80,7 +78,7 @@ describe('loadMap', function() {
     })
     .on('finish', cb);
   });
-  
+
   it('should throw error if failed to parse source map file', function (cb) {
     gulp.src(path.resolve(__dirname, 'files/sourcemap/b.js'))
     .pipe(loadMap())

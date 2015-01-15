@@ -1,58 +1,80 @@
 "use strict";
-Object.defineProperties(exports, {
-  default: {get: function() {
-      return $__default;
-    }},
-  __esModule: {value: true}
-});
-var $__through2__,
-    $__cofs__,
-    $__co__,
-    $__path__,
-    $__chalk__;
-var through = ($__through2__ = require("through2"), $__through2__ && $__through2__.__esModule && $__through2__ || {default: $__through2__}).default;
-var cofs = ($__cofs__ = require("./cofs"), $__cofs__ && $__cofs__.__esModule && $__cofs__ || {default: $__cofs__}).default;
-var co = ($__co__ = require("co"), $__co__ && $__co__.__esModule && $__co__ || {default: $__co__}).default;
-var path = ($__path__ = require("path"), $__path__ && $__path__.__esModule && $__path__ || {default: $__path__}).default;
-var chalk = ($__chalk__ = require("chalk"), $__chalk__ && $__chalk__.__esModule && $__chalk__ || {default: $__chalk__}).default;
+
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var through = _interopRequire(require("through2"));
+
+var cofs = _interopRequire(require("./cofs"));
+
+var co = _interopRequire(require("co"));
+
+var path = _interopRequire(require("path"));
+
+var chalk = _interopRequire(require("chalk"));
+
+/**
+ * @function loadMap
+ */
 function loadMap(ext) {
   if (!ext) {
-    ext = '.map';
+    ext = ".map";
   }
-  return through.obj(function(file, enc, next) {
+  return through.obj(function (file, enc, next) {
     if (file.isNull()) {
       next();
     } else {
       var self = this;
-      co(function*() {
-        var mapFile = file.path + ext;
-        var map;
-        try {
-          if (yield cofs.exists(mapFile)) {
-            map = JSON.parse(yield cofs.readFile(mapFile));
-          } else {
-            map = {
-              version: 3,
-              file: file.relative,
-              names: [],
-              mappings: '',
-              sources: [file.relative],
-              sourcesContent: [file.contents.toString(enc)],
-              sourceRoot: '/' + path.relative(file.cwd, file.base) + '/'
-            };
+      co(regeneratorRuntime.mark(function callee$2$0() {
+        var mapFile, map;
+        return regeneratorRuntime.wrap(function callee$2$0$(context$3$0) {
+          while (1) switch (context$3$0.prev = context$3$0.next) {
+            case 0:
+              mapFile = file.path + ext;
+              context$3$0.prev = 1;
+              context$3$0.next = 4;
+              return cofs.exists(mapFile);
+            case 4:
+              if (!context$3$0.sent) {
+                context$3$0.next = 11;
+                break;
+              }
+              context$3$0.next = 7;
+              return cofs.readFile(mapFile);
+            case 7:
+              context$3$0.t4 = context$3$0.sent;
+              map = JSON.parse(context$3$0.t4);
+              context$3$0.next = 12;
+              break;
+            case 11:
+              map = {
+                version: 3,
+                file: file.relative,
+                names: [],
+                mappings: "",
+                sources: [file.relative],
+                sourcesContent: [file.contents.toString(enc)],
+                sourceRoot: "/" + path.relative(file.cwd, file.base) + "/"
+              };
+            case 12:
+              file.sourceMap = map;
+              self.push(file);
+              next();
+              context$3$0.next = 21;
+              break;
+            case 17:
+              context$3$0.prev = 17;
+              context$3$0.t5 = context$3$0["catch"](1);
+              console.log("[" + chalk.cyan("loadMap") + "] Failed to load source map for " + chalk.red(file.path));
+              next(context$3$0.t5);
+            case 21:
+            case "end":
+              return context$3$0.stop();
           }
-          file.sourceMap = map;
-          self.push(file);
-          next();
-        } catch (err) {
-          console.log(("[" + chalk.cyan('loadMap') + "] Failed to load source map for " + chalk.red(file.path)));
-          next(err);
-        }
-      });
+        }, callee$2$0, this, [[1, 17]]);
+      }));
     }
   });
 }
-var $__default = loadMap;
-
-//# sourceMappingURL=load-map.js.map
-//# sourceURL=load-map.js
+module.exports = loadMap;

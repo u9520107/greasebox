@@ -1,13 +1,10 @@
 import istanbul from 'istanbul';
 import esprima from 'esprima-fb';
 import sourceMap from 'source-map';
-import traceur from 'traceur';
 import path from 'path';
 import fs from 'fs';
-const DEFAULT_TRACEUR_OPTIONS = {
-  modules: 'commonjs',
-  sourceMaps: 'file'
-};
+import to5 from '6to5';
+
 function createSourceMapConsumer(map) {
   if (typeof map === 'string') {
     map = JSON.parse(map);
@@ -17,44 +14,31 @@ function createSourceMapConsumer(map) {
 /**
  *  Istanbul instrumenter extention that compiles es6 source into es5 version
  *
- *  @class TraceurInstrumenter
+ *  @class To5Instrumenter
  *  @extends instanbul.Instrumenter
  */
-class TraceurInstrumenter extends istanbul.Instrumenter {
+class To5Instrumenter extends istanbul.Instrumenter {
   /**
    *  @constructor
    *  @param {object} opts - options passed to istanbul.Instrumenter
    */
   constructor(opts = {}) {
     istanbul.Instrumenter.call(this, opts);
-    this._createTraceurCompiler(opts.traceurOpts);
-  }
-  /**
-   *  Internal function used to set default values to _traceurOpts
-   *
-   *  @function
-   *  @param {object} opts - traceurOpts passed from constructor
-   */
-  _createTraceurCompiler(opts = {}) {
-    for (var key in DEFAULT_TRACEUR_OPTIONS) {
-      if (!opts.hasOwnProperty(key)) {
-        opts[key] = DEFAULT_TRACEUR_OPTIONS[key];
-      }
-    }
-    this._compiler = new traceur.NodeCompiler(opts);
   }
   _compile(code, filename) {
-    var compiled = this._compiler.compile(code, filename);
-    return {
-      code: compiled,
-      map: this._compiler.getSourceMap()
-    };
+    var compiled = to5.transform(code, {
+      filename: filename,
+      sourceMap: true
+    });
+    return compiled;
   }
   _parse(code) {
     var program = esprima.parse(code, {
       loc: true,
       range: true,
-      sourceType: 'module'
+      sourceType: 'module',
+      es5: true,
+      comment: true
     });
     return program;
   }
@@ -111,4 +95,4 @@ class TraceurInstrumenter extends istanbul.Instrumenter {
     return super.getPreamble(sourceCode, emitUseStrict);
   }
 }
-export default TraceurInstrumenter;
+export default To5Instrumenter;

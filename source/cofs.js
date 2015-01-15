@@ -36,6 +36,7 @@ var methods = [
 ];
 var cofs = {};
 methods.forEach(function (name) {
+  /* istanbul ignore else */
   if (fs[name]) {
     cofs[name] = thunkify(fs[name]);
   }

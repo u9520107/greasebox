@@ -1,27 +1,53 @@
 "use strict";
-Object.defineProperties(exports, {
-  default: {get: function() {
-      return $__default;
-    }},
-  __esModule: {value: true}
-});
-var $__cofs__,
-    $__path__;
-var cofs = ($__cofs__ = require("./cofs"), $__cofs__ && $__cofs__.__esModule && $__cofs__ || {default: $__cofs__}).default;
-var path = ($__path__ = require("path"), $__path__ && $__path__.__esModule && $__path__ || {default: $__path__}).default;
-function* rm(filepath) {
-  if (yield cofs.exists(filepath)) {
-    if ((yield cofs.stat(filepath)).isDirectory()) {
-      yield (yield cofs.readdir(filepath)).map(function(item) {
-        return rm(path.resolve(filepath, item));
-      });
-      yield cofs.rmdir(filepath);
-    } else {
-      yield cofs.unlink(filepath);
-    }
-  }
-}
-var $__default = rm;
 
-//# sourceMappingURL=rm.js.map
-//# sourceURL=rm.js
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var rm = regeneratorRuntime.mark(function rm(filepath) {
+  return regeneratorRuntime.wrap(function rm$(context$1$0) {
+    while (1) switch (context$1$0.prev = context$1$0.next) {
+      case 0:
+        context$1$0.next = 2;
+        return cofs.exists(filepath);
+      case 2:
+        if (!context$1$0.sent) {
+          context$1$0.next = 16;
+          break;
+        }
+        context$1$0.next = 5;
+        return cofs.stat(filepath);
+      case 5:
+        if (!context$1$0.sent.isDirectory()) {
+          context$1$0.next = 14;
+          break;
+        }
+        context$1$0.next = 8;
+        return cofs.readdir(filepath);
+      case 8:
+        context$1$0.next = 10;
+        return context$1$0.sent.map(function (item) {
+          return rm(path.resolve(filepath, item));
+        });
+      case 10:
+        context$1$0.next = 12;
+        return cofs.rmdir(filepath);
+      case 12:
+        context$1$0.next = 16;
+        break;
+      case 14:
+        context$1$0.next = 16;
+        return cofs.unlink(filepath);
+      case 16:
+      case "end":
+        return context$1$0.stop();
+    }
+  }, rm, this);
+});
+
+var cofs = _interopRequire(require("./cofs"));
+
+var path = _interopRequire(require("path"));
+
+module.exports = rm;
+//remove content of directory

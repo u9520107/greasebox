@@ -4,15 +4,13 @@ var gulp = require('gulp');
 var through = require('through2');
 var co = require('co');
 
-var traceur = require('traceur');
-require(traceur.RUNTIME_PATH);
 
-var writeMap = require(path.resolve(__dirname, '../source/write-map')).default;
-var rm = require(path.resolve(__dirname, '../dist/rm')).default;
-var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
-var traceurTransform = require(path.resolve(__dirname, '../dist/traceur-transform')).default;
-var jsxTransform = require(path.resolve(__dirname, '../dist/jsx-transform')).default;
-var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
+var writeMap = require(path.resolve(__dirname, '../source/write-map'));
+var rm = require(path.resolve(__dirname, '../dist/rm'));
+var loadMap = require(path.resolve(__dirname, '../dist/load-map'));
+var cofs = require(path.resolve(__dirname, '../dist/cofs'));
+var to5Transform = require(path.resolve(__dirname, '../dist/to5-transform'));
+var removeCss = require(path.resolve(__dirname, '../dist/remove-css'));
 
 describe('writeMap', function() {
   it('should be a function', function () {
@@ -32,7 +30,7 @@ describe('writeMap', function() {
       cb(err);
     })
     .on('finish', cb);
-    
+
   });
 
   //folders are often passed into the pipe by gulp.src as null files
@@ -43,9 +41,9 @@ describe('writeMap', function() {
       cb(err);
     })
     .on('finish', cb);
-  
-  }); 
-  
+
+  });
+
   it('should work with globs', function (cb) {
     var files = {};
     gulp.src(path.resolve(__dirname, 'files/glob/**/*'))
@@ -57,6 +55,7 @@ describe('writeMap', function() {
       this.push(file);
       next();
     }))
+    .pipe(removeCss())
     .pipe(writeMap())
     .pipe(through.obj(function (file, enc, next){
       if(!file.isNull() && file.path.match(/\.map$/))  {
@@ -102,12 +101,12 @@ describe('writeMap', function() {
   });
   it('should accept alternative sourceRoot', function (cb) {
     var found = false;
-    gulp.src(path.resolve(__dirname, 'files/b.jsx'), {
+    gulp.src(path.resolve(__dirname, 'files/css.jsx'), {
       base: __dirname
     })
     .pipe(loadMap())
-    .pipe(jsxTransform())
-      .pipe(traceurTransform())
+    .pipe(removeCss())
+    .pipe(to5Transform())
       .pipe(writeMap('/test/'))
       .pipe(through.obj(function(file, enc, next){
         if(!file.isNull() && file.path.match(/\.map$/)) {

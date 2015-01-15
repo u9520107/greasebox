@@ -5,13 +5,11 @@ var through = require('through2');
 var co = require('co');
 
 
-var traceur = require('traceur');
-require(traceur.RUNTIME_PATH);
 
-var removeCss = require(path.resolve(__dirname, '../source/remove-css')).default;
-var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
-var rm = require(path.resolve(__dirname, '../dist/rm')).default;
-var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
+var removeCss = require(path.resolve(__dirname, '../source/remove-css'));
+var loadMap = require(path.resolve(__dirname, '../dist/load-map'));
+var rm = require(path.resolve(__dirname, '../dist/rm'));
+var cofs = require(path.resolve(__dirname, '../dist/cofs'));
 
 describe('removeCss', function() {
   it('should be a function', function() {
@@ -99,7 +97,7 @@ describe('removeCss', function() {
         cb(new Error('no error thrown'));
       });
   });
-  
+
   // only test the existance of source map but not the validity
   it('should make changes to the sourceMap property', function (cb) {
     var original;

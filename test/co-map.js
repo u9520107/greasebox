@@ -6,16 +6,16 @@ var co = require('co');
 
 
 
-var coForeach = require(path.resolve(__dirname, '../source/co-foreach'));
+var coMap = require(path.resolve(__dirname, '../source/co-map'));
 
-describe('coForeach', function() {
+describe('coMap', function() {
 
   it('should be a function', function () {
-    expect(coForeach).to.be.a('function');
+    expect(coMap).to.be.a('function');
   });
 
   it('should be a generator function', function () {
-    var gen = coForeach();
+    var gen = coMap();
     expect(gen).to.exist();
     expect(gen.next).to.be.a('function');
   });
@@ -23,7 +23,7 @@ describe('coForeach', function() {
   it('should be yieldable', function (cb) {
     co(function * () {
       try {
-        yield coForeach([], function * () {});
+        yield coMap([], function * () {});
         cb();
       } catch(err) {
         cb(err);
@@ -34,7 +34,7 @@ describe('coForeach', function() {
   it('should pass array item and index to the handler', function (cb) {
     co(function * () {
       var testArr = [0, 1, 2];
-      yield coForeach(testArr, function *(no, idx) {
+      yield coMap(testArr, function *(no, idx) {
         expect(no).to.equal(idx);
       });
       cb();
@@ -48,7 +48,7 @@ describe('coForeach', function() {
     co(function * () {
         var testArr = [1, 2, 3];
         var result = [];
-        yield coForeach(testArr, function *(no, idx) {
+        yield coMap(testArr, function *(no, idx) {
           yield new Promise(function (resolve) {
             setTimeout(resolve, 100);
           });
@@ -61,7 +61,34 @@ describe('coForeach', function() {
     });
   });
 
+  it('should return an array', function (cb) {
+    co(function * () {
+      var testArr = [0, 1, 2];
+      var result = yield coMap(testArr, function *(no){
+        return no;
+      });
+      expect(result).to.be.a('array');
+      expect(result).to.deep.equal(testArr);
+      cb();
+    }).catch(function (err) {
+      cb(err);
+    });
+  });
 
-
+  it('should retrn an array of returned values', function (cb) {
+    co(function * () {
+      var testArr = [0,1,2];
+      var expected = testArr.map(function (item) {
+        return item * 2;
+      });
+      var result = yield coMap(testArr, function * (item) {
+        return item * 2;
+      });
+      expect(result).to.deep.equal(expected);
+      cb();
+    }).catch(function (err) {
+      cb(err);
+    });
+  });
 
 });

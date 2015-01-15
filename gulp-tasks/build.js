@@ -4,35 +4,27 @@ var cp = require('child_process');
 var co = require('co');
 var through = require('through2');
 
-var traceur = require('traceur');
-require(traceur.RUNTIME_PATH);
+require('6to5/polyfill');
 
 
-var traceurTransform = require(path.resolve(__dirname , '../dist/traceur-transform')).default;
-var removeCss = require(path.resolve(__dirname , '../dist/remove-css')).default;
-var loadMap = require(path.resolve(__dirname, '../dist/load-map')).default;
-var writeMap = require(path.resolve(__dirname, '../dist/write-map')).default;
-var rm = require(path.resolve(__dirname, '../dist/rm')).default;
-var cofs = require(path.resolve(__dirname, '../dist/cofs')).default;
+var to5Transform = require(path.resolve(__dirname , '../dist/to5-transform'));
+var removeCss = require(path.resolve(__dirname , '../dist/remove-css'));
+var loadMap = require(path.resolve(__dirname, '../dist/load-map'));
+var writeMap = require(path.resolve(__dirname, '../dist/write-map'));
+var rm = require(path.resolve(__dirname, '../dist/rm'));
+var cofs = require(path.resolve(__dirname, '../dist/cofs'));
 
 gulp.task('harmony:build-tmp', ['harmony:test'], function (cb) {
   gulp.src(['source/*.js', '!source/cli.js'])
     .pipe(loadMap())
-    .pipe(traceurTransform({
-      modules: 'commonjs',
-      generators: 'parse',
-      symbols: 'parse',
-      promises: 'parse'
-    }))
+    .pipe(to5Transform())
     .pipe(writeMap())
     .pipe(gulp.dest('build-tmp'))
     .on('end', cb);
 });
 gulp.task('harmony:build:cli', ['harmony:test', 'harmony:clean:cli'], function (cb) {
   gulp.src(['source/*.js'])
-    .pipe(traceurTransform({
-      modules: 'commonjs'
-    }))
+    .pipe(to5Transform())
     .pipe(through.obj(function (file, enc, next){
       if(/cli-loader\.js$/i.test(file.path)) {
         var output = '#!/usr/bin/env node\n\n';

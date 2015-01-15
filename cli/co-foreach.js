@@ -1,39 +1,33 @@
 "use strict";
-var $__0 = $traceurRuntime.initGeneratorFunction(forEach);
-Object.defineProperties(exports, {
-  default: {get: function() {
-      return $__default;
-    }},
-  __esModule: {value: true}
-});
+
+var forEach = regeneratorRuntime.mark( /**
+                                        * @function
+                                        *  @param {array} array - The array to iterate over
+                                        *  @param {function} - The generator function
+                                        *    usage: yield forEach(arr, fn) would iterate through the array
+                                        */
 function forEach(arr, fn) {
-  var i,
-      len;
-  return $traceurRuntime.createGeneratorInstance(function($ctx) {
-    while (true)
-      switch ($ctx.state) {
-        case 0:
-          i = 0, len = arr.length;
-          $ctx.state = 7;
+  var i, len;
+  return regeneratorRuntime.wrap(function forEach$(context$1$0) {
+    while (1) switch (context$1$0.prev = context$1$0.next) {
+      case 0:
+        i = 0, len = arr.length;
+      case 1:
+        if (!(i < len)) {
+          context$1$0.next = 7;
           break;
-        case 7:
-          $ctx.state = (i < len) ? 1 : -2;
-          break;
-        case 4:
-          i++;
-          $ctx.state = 7;
-          break;
-        case 1:
-          $ctx.state = 2;
-          return fn(arr[i]);
-        case 2:
-          $ctx.maybeThrow();
-          $ctx.state = 4;
-          break;
-        default:
-          return $ctx.end();
-      }
-  }, $__0, this);
-}
-var $__default = forEach;
-//# sourceURL=co-foreach.js
+        }
+        context$1$0.next = 4;
+        return fn(arr[i], i);
+      case 4:
+        i++;
+        context$1$0.next = 1;
+        break;
+      case 7:
+      case "end":
+        return context$1$0.stop();
+    }
+  }, forEach, this);
+});
+
+module.exports = forEach;

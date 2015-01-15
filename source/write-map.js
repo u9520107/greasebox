@@ -16,6 +16,15 @@ function writeMap(root, ext) {
       if (sourceRoot !== file.sourceMap.sourceRoot) {
         var nameCheck = new RegExp('^' + escapeRegExp(sourceRoot));
         file.sourceMap.sources = file.sourceMap.sources.map(function (name) {
+          /**
+           *  Else cases happens when transformation had gone through file name changes.
+           *  e.g. .jsx => .js
+           *  Or when transforms have included compiled code from other sources
+           *  eg. traceur's @tranceur runtime files
+           *
+           *  Marks to be difficult to test after using 6to5 instead of traceur.
+           */
+          /* istanbul ignore else */
           if (name[0] !== '/' && name[0] !== '@') {
             return file.sourceMap.sourceRoot + name;
           } else if (name.match(nameCheck)) {
@@ -35,7 +44,6 @@ function writeMap(root, ext) {
       this.push(file);
       this.push(mapFile);
     } else {
-      console.log(`[${chalk.cyan('writeMap')}] Failed to write sourcemap for ${chalk.red( file.path )}`);
       this.push(file);
     }
     next();

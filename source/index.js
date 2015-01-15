@@ -1,31 +1,26 @@
-import traceur from 'traceur';
-require(traceur.RUNTIME_PATH);
-import jsxTransform from './jsx-transform';
+import '6to5/polyfill';
 import loadMap from './load-map';
 import removeCss from './remove-css';
 import rm from './rm';
-import traceurInstrumenter from './traceur-instrumenter';
-import traceurTransform from './traceur-transform';
 import writeMap from './write-map';
 import stylusTransform from './stylus-transform';
 import cofs from './cofs';
 import coStream from './co-stream';
-import jsxFormatter from './jsx-formatter';
 import coForeach from './co-foreach';
 import coMap from './co-map';
+import to5Instrumenter from './to5-instrumenter';
+import to5Transform from './to5-transform';
 
 export {
-  jsxTransform,
-  jsxFormatter,
   loadMap,
   removeCss,
   rm,
-  traceurInstrumenter,
-  traceurTransform,
   writeMap,
   stylusTransform,
   cofs,
   coStream,
   coForeach,
-  coMap
+  coMap,
+  to5Instrumenter,
+  to5Transform
 };
