@@ -14,6 +14,9 @@ var path = _interopRequire(require("path"));
 
 var chalk = _interopRequire(require("chalk"));
 
+var debug = _interopRequire(require("debug"));
+
+var log = debug("stylusTransform");
 /**
  * @function
  *
@@ -48,6 +51,7 @@ function stylusTransform() {
       next();
     } catch (err) {
       console.log("[" + chalk.cyan("stylusTransform") + "] Failed to transform " + chalk.red(file.path));
+      log(err);
       next(err);
     }
   });

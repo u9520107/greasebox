@@ -14,6 +14,8 @@ var chalk = _interopRequire(require("chalk"));
 
 var to5 = _interopRequire(require("6to5"));
 
+var log = debug("to5Transform");
+
 function to5Transform() {
   var opts = arguments[0] === undefined ? {} : arguments[0];
   return through.obj(function (file, enc, cb) {
@@ -45,6 +47,7 @@ function to5Transform() {
       cb();
     } catch (err) {
       console.log("[" + chalk.cyan("to5Transform") + "] Failed to transform " + chalk.red(file.path));
+      log(err);
       cb(err);
     }
   });

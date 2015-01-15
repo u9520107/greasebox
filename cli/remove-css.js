@@ -12,6 +12,9 @@ var applyMap = _interopRequire(require("vinyl-sourcemaps-apply"));
 
 var chalk = _interopRequire(require("chalk"));
 
+var debug = _interopRequire(require("debug"));
+
+var log = debug("removeCss");
 /**
  * @function
  *
@@ -26,7 +29,9 @@ function removeCss() {
         var body = [];
         //remove css imports
         ast.program.body.forEach(function (part) {
-          if (part.type === "ImportDeclaration" && part.source.value.match(/\.css!$/i)) {} else {
+          if (part.type === "ImportDeclaration" && part.source.value.match(/\.css!$/i)) {
+            log("removed %s", part.source.value);
+          } else {
             body.push(part);
           }
         });
@@ -45,6 +50,7 @@ function removeCss() {
       next();
     } catch (err) {
       console.log("[" + chalk.cyan("removeCss") + "] Failed to transform " + chalk.red(file.path));
+      log(err);
       next(err);
     }
   });

@@ -14,6 +14,9 @@ var path = _interopRequire(require("path"));
 
 var chalk = _interopRequire(require("chalk"));
 
+var debug = _interopRequire(require("debug"));
+
+var log = debug("loadMap");
 /**
  * @function loadMap
  */
@@ -61,14 +64,15 @@ function loadMap(ext) {
               file.sourceMap = map;
               self.push(file);
               next();
-              context$3$0.next = 21;
+              context$3$0.next = 22;
               break;
             case 17:
               context$3$0.prev = 17;
               context$3$0.t5 = context$3$0["catch"](1);
               console.log("[" + chalk.cyan("loadMap") + "] Failed to load source map for " + chalk.red(file.path));
+              log(context$3$0.t5);
               next(context$3$0.t5);
-            case 21:
+            case 22:
             case "end":
               return context$3$0.stop();
           }

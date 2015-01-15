@@ -4,6 +4,8 @@ import debug from 'debug';
 import chalk from 'chalk';
 import to5 from '6to5';
 
+let log = debug('to5Transform');
+
 function to5Transform(opts = {}) {
   return through.obj(function (file, enc, cb) {
     try {
@@ -34,6 +36,7 @@ function to5Transform(opts = {}) {
       cb();
     } catch (err) {
       console.log(`[${ chalk.cyan( 'to5Transform' ) }] Failed to transform ${chalk.red( file.path )}`);
+      log(err);
       cb(err);
     }
   });

@@ -3,6 +3,9 @@ import Renderer from 'stylus/lib/renderer';
 import applyMap from 'vinyl-sourcemaps-apply';
 import path from 'path';
 import chalk from 'chalk';
+import debug from 'debug';
+
+let log = debug('stylusTransform');
 /**
  * @function
  *
@@ -37,6 +40,7 @@ function stylusTransform() {
       next();
     } catch (err) {
       console.log(`[${ chalk.cyan( 'stylusTransform' ) }] Failed to transform ${chalk.red( file.path )}`);
+      log(err);
       next(err);
     }
   });
