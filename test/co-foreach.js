@@ -49,9 +49,10 @@ describe('coForeach', function() {
         var testArr = [1, 2, 3];
         var result = [];
         yield coForeach(testArr, function *(no, idx) {
-          yield new Promise(function (resolve) {
-            setTimeout(resolve, 100);
-          });
+          //yield new Promise(function (resolve) {
+          //  setTimeout(resolve, 100);
+          //});
+          yield sleep(100);
           result.push(no);
         });
         expect(result).to.deep.equal(testArr);
@@ -65,3 +66,15 @@ describe('coForeach', function() {
 
 
 });
+
+
+//function sleep(t) {
+//  return new Promise(function (resolve) {
+//    setTimeout(resolve, t);
+//  });
+//}
+function sleep(t) {
+  return function (cb) {
+    setTimeout(cb, t);
+  };
+}

@@ -1,4 +1,4 @@
-import '6to5/polyfill';
+import './runtime';
 import loadMap from './load-map';
 import removeCss from './remove-css';
 import rm from './rm';

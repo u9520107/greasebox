@@ -4,7 +4,7 @@ var _interopRequire = function (obj) {
   return obj && (obj["default"] || obj);
 };
 
-require("6to5/polyfill");
+require("./runtime");
 
 var loadMap = _interopRequire(require("./load-map"));
 

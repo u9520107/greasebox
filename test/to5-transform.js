@@ -56,13 +56,9 @@ describe('to5Transform', function() {
   it('should transform es6 files to node compliant modules by default', function(cb) {
     gulp.src(path.resolve(__dirname, 'files/a.js'))
       .pipe(to5Transform())
-      .on('error', function (err) {
-        console.log('####');
-      })
       .pipe(gulp.dest(path.resolve(__dirname, 'tmp/traceur-transform')))
       .on('finish', function() {
         co(function * () {
-          console.log('check');
           var testMod = require(path.resolve(__dirname, 'tmp/traceur-transform/a.js'));
           try {
             expect(testMod).to.exist();
