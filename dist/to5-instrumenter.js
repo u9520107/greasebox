@@ -187,3 +187,5 @@ var To5Instrumenter = (function (_istanbul$Instrumenter) {
 })(istanbul.Instrumenter);
 
 module.exports = To5Instrumenter;
+
+//# sourceMappingURL=./to5-instrumenter.js.map

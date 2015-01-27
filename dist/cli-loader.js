@@ -8,3 +8,5 @@ var traceur = _interopRequire(require("traceur"));
 
 require(traceur.RUNTIME_PATH);
 var cli = _interopRequire(require("./cli"));
+
+//# sourceMappingURL=./cli-loader.js.map

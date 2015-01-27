@@ -39,3 +39,5 @@ exports.coForeach = coForeach;
 exports.coMap = coMap;
 exports.to5Instrumenter = to5Instrumenter;
 exports.to5Transform = to5Transform;
+
+//# sourceMappingURL=./index.js.map

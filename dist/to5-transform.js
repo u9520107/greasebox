@@ -53,3 +53,5 @@ function to5Transform() {
   });
 }
 module.exports = to5Transform;
+
+//# sourceMappingURL=./to5-transform.js.map

@@ -51,3 +51,5 @@ var path = _interopRequire(require("path"));
 
 module.exports = rm;
 //remove content of directory
+
+//# sourceMappingURL=./rm.js.map

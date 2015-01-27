@@ -12,6 +12,8 @@ var gutil = _interopRequire(require("gulp-util"));
 
 var chalk = _interopRequire(require("chalk"));
 
+var hasSourceMappingUrl = /^\/\/# sourceMappingURL=/;
+
 function writeMap(root, ext) {
   if (!ext) {
     ext = ".map";
@@ -50,6 +52,14 @@ function writeMap(root, ext) {
         path: file.path + ext,
         contents: new Buffer(JSON.stringify(file.sourceMap))
       });
+
+      // add sourceMappingURL if not found in source
+      var src = file.contents.toString(enc);
+      if (!hasSourceMappingUrl.test(src)) {
+        src += "\n\n//# sourceMappingURL=./" + path.basename(mapFile.path);
+        file.contents = new Buffer(src);
+      }
+
       this.push(file);
       this.push(mapFile);
     } else {

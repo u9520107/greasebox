@@ -56,3 +56,5 @@ function removeCss() {
   });
 }
 module.exports = removeCss;
+
+//# sourceMappingURL=./remove-css.js.map

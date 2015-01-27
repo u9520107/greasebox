@@ -33,3 +33,5 @@ function coStream(stream) {
   });
 }
 module.exports = coStream;
+
+//# sourceMappingURL=./co-stream.js.map

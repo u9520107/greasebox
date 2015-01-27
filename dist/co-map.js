@@ -38,3 +38,5 @@ function map(arr, fn) {
 });
 
 module.exports = map;
+
+//# sourceMappingURL=./co-map.js.map

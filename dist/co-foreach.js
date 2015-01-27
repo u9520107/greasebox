@@ -31,3 +31,5 @@ function forEach(arr, fn) {
 });
 
 module.exports = forEach;
+
+//# sourceMappingURL=./co-foreach.js.map

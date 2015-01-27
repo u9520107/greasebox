@@ -82,3 +82,5 @@ function loadMap(ext) {
   });
 }
 module.exports = loadMap;
+
+//# sourceMappingURL=./load-map.js.map

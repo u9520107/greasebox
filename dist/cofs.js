@@ -32,3 +32,5 @@ cofs.createReadStream = function () {
   return coStream(fs.createReadStream.apply(null, arguments));
 };
 module.exports = cofs;
+
+//# sourceMappingURL=./cofs.js.map

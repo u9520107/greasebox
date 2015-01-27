@@ -15,3 +15,5 @@ var test = regeneratorRuntime.mark(function test() {
 });
 
 var co = _interopRequire(require("co"));
+
+//# sourceMappingURL=./project-templates.js.map
