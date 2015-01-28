@@ -2,9 +2,7 @@
 
 "use strict";
 
-var _interopRequire = function (obj) {
-  return obj && (obj["default"] || obj);
-};
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
 var traceur = _interopRequire(require("traceur"));
 

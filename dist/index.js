@@ -1,8 +1,6 @@
 "use strict";
 
-var _interopRequire = function (obj) {
-  return obj && (obj["default"] || obj);
-};
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
 require("./runtime");
 
@@ -39,5 +37,6 @@ exports.coForeach = coForeach;
 exports.coMap = coMap;
 exports.to5Instrumenter = to5Instrumenter;
 exports.to5Transform = to5Transform;
+exports.__esModule = true;
 
 //# sourceMappingURL=./index.js.map

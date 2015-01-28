@@ -99,7 +99,7 @@ describe('to5Transform', function() {
     var expected;
     gulp.src(path.resolve(__dirname, 'files/a.js'))
       .pipe(to5Transform({
-        blacklist: ['generators']
+        blacklist: ['regenerator']
       }))
       .pipe(through.obj(function (file, enc, next) {
           result = file.contents.toString(enc);
@@ -107,7 +107,7 @@ describe('to5Transform', function() {
       })).on('finish', function() {
         gulp.src(path.resolve(__dirname, 'files/a.js'))
         .pipe(_to5Transform({
-          blacklist: ['generators']
+          blacklist: ['regenerator']
         }))
         .pipe(through.obj(function (file, enc, next) {
           expected = file.contents.toString(enc);

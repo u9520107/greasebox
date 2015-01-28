@@ -1,1 +1,1 @@
-{"version":3,"sources":["project-templates.js"],"names":[],"mappings":";;;;;;IAEU,IAAI,2BAAd,SAAU,IAAI;;;;;;;KAAJ,IAAI;CAEb;;IAJM,EAAE,2BAAM,IAAI","file":"project-templates.js","sourceRoot":"/source/","sourcesContent":["import co from 'co';\n\nfunction *test () {\n\n}\n"]}
+{"version":3,"sources":["project-templates.js"],"names":[],"mappings":";;;;IAEU,IAAI,2BAAd,SAAU,IAAI;;;;;;;KAAJ,IAAI;CAEb;;IAJM,EAAE,2BAAM,IAAI","file":"project-templates.js","sourceRoot":"/source/","sourcesContent":["import co from 'co';\n\nfunction *test () {\n\n}\n"]}

@@ -1,8 +1,6 @@
 "use strict";
 
-var _interopRequire = function (obj) {
-  return obj && (obj["default"] || obj);
-};
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
 var rm = regeneratorRuntime.mark(function rm(filepath) {
   return regeneratorRuntime.wrap(function rm$(context$1$0) {
