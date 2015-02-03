@@ -14,11 +14,11 @@ describe('coForeach', function() {
     expect(coForeach).to.be.a('function');
   });
 
-  it('should be a generator function', function () {
-    var gen = coForeach();
-    expect(gen).to.exist();
-    expect(gen.next).to.be.a('function');
-  });
+  //it('should be a generator function', function () {
+  //  var gen = coForeach();
+  //  expect(gen).to.exist();
+  //  expect(gen.next).to.be.a('function');
+  //});
 
   it('should be yieldable', function (cb) {
     co(function * () {
@@ -57,12 +57,24 @@ describe('coForeach', function() {
         });
         expect(result).to.deep.equal(testArr);
         cb();
-    }).catch(function (err) {
-      cb(err);
-    });
+    }).catch(cb);
   });
 
+  it('should return promise when not used in generator context', function (cb) {
+    coForeach([1, 2, 3], function * () {
 
+    }).then(cb);
+  });
+
+  it('should work with non generator functions if it returns promise', function (cb) {
+    co(function * () {
+      yield coForeach([0, 1, 2], function (no, idx) {
+        expect(no).to.equal(idx);
+        return Promise.resolve();
+      });
+      cb();
+    }).catch(cb);
+  });
 
 
 });

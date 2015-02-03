@@ -14,11 +14,11 @@ describe('coMap', function() {
     expect(coMap).to.be.a('function');
   });
 
-  it('should be a generator function', function () {
-    var gen = coMap();
-    expect(gen).to.exist();
-    expect(gen.next).to.be.a('function');
-  });
+  //it('should be a generator function', function () {
+  //  var gen = coMap();
+  //  expect(gen).to.exist();
+  //  expect(gen.next).to.be.a('function');
+  //});
 
   it('should be yieldable', function (cb) {
     co(function * () {
@@ -91,4 +91,24 @@ describe('coMap', function() {
     });
   });
 
+  it('should return a promise when not used in generator context', function (cb) {
+    var testArr = [0, 1, 2];
+    coMap(testArr, function *(no) {
+      return no;
+    }).then(function (result) {
+      expect(result).to.deep.equal(testArr);
+      cb();
+    }).catch(cb);
+  });
+
+  it('should work with functions that returns a promise', function (cb) {
+    co(function * () {
+      var testArr = [1,2,3];
+      var result = yield coMap(testArr, function (no){
+        return Promise.resolve(no);
+      });
+      expect(result).to.deep.equal(testArr);
+      cb();
+    }).catch(cb);
+  });
 });
