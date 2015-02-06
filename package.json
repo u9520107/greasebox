@@ -3,7 +3,6 @@
   "version": "0.4.6",
   "description": "greasebox\r =========",
   "main": "dist/index.js",
-  "bin": "cli/cli.js",
   "scripts": {
     "test": "node node_modules/gulp/bin/gulp test"
   },

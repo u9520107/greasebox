@@ -2,8 +2,6 @@
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-require("./runtime");
-
 var loadMap = _interopRequire(require("./load-map"));
 
 var removeCss = _interopRequire(require("./remove-css"));

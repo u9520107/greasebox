@@ -10,7 +10,7 @@ var cofs = require(path.resolve(__dirname, '../dist/cofs'));
 describe('greasebox', function() {
   it('should contain all the modules', function(cb) {
 
-    var exclusions = ['cli-loader', 'cli', 'project-templates', 'runtime'].map(function (name) {
+    var exclusions = [].map(function (name) {
       return computeName(name);
     });
 

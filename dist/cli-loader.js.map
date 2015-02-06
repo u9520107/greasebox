@@ -1,1 +1,0 @@
-{"version":3,"sources":["cli-loader.js"],"names":[],"mappings":";;;;IAAO,OAAO,2BAAM,SAAS;;AAC7B,OAAO,CAAC,OAAO,CAAC,YAAY,CAAC,CAAC;IACvB,GAAG,2BAAM,OAAO","file":"cli-loader.js","sourceRoot":"/source/","sourcesContent":["import traceur from 'traceur';\nrequire(traceur.RUNTIME_PATH);\nimport cli from './cli';\n"]}

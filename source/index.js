@@ -1,4 +1,3 @@
-import './runtime';
 import loadMap from './load-map';
 import removeCss from './remove-css';
 import rm from './rm';
