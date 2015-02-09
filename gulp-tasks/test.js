@@ -1,34 +1,27 @@
-var gulp = require('gulp');
-var path = require('path');
-var istanbul = require('gulp-istanbul');
-var mocha = require('gulp-mocha');
-var through = require('through2');
-var esp = require('esprima-fb');
-require('6to5/polyfill');
+import gulp from 'gulp';
+import path from 'path';
+import istanbul from 'gulp-istanbul';
+import mocha from 'gulp-mocha';
+import through from 'through2';
+import esp from 'esprima-fb';
 
-var defaultIstanbul = require('gulp-istanbul/node_modules/istanbul');
-var To5Instrumenter = require(path.resolve(__dirname, '../dist/to5-instrumenter'));
+import defaultIstanbul from 'gulp-istanbul/node_modules/istanbul';
+import To5Instrumenter from '../dist/to5-instrumenter';
+
 defaultIstanbul.Instrumenter = To5Instrumenter;
 
-gulp.task('harmony:test', function(cb) {
-  if(false) {
-    cb();
-  }else {
-    gulp.src(['source/*.js'])
+gulp.task('test', (cb) => {
+  gulp.src(['source/*.js'])
     .pipe(istanbul({
       includeUntested: true
     }))
-    .on('error', function (err) {
-      console.log(err);
-      cb(err);
-    })
-    .on('finish', function() {
+    .on('error', cb)
+    .on('finish', () => {
       gulp.src(['test/*.js'])
       .pipe(mocha())
       .pipe(istanbul.writeReports())
-      .on('end', function(err) {
-        cb(err);
-      });
+      .on('error', cb)
+      .on('end', cb);
     });
-  }
 });
+

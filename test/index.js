@@ -1,41 +1,36 @@
-var expect = require('chai').expect;
-var path = require('path');
-var gulp = require('gulp');
-var through = require('through2');
-var co = require('co');
+import chai from 'chai';
+import path from 'path';
+import gulp from 'gulp';
+import through from 'through2';
+import co from 'co';
 
-var greasebox = require(path.resolve(__dirname, '../source/index'));
-var cofs = require(path.resolve(__dirname, '../dist/cofs'));
+const expect = chai.expect;
 
-describe('greasebox', function() {
-  it('should contain all the modules', function(cb) {
+import * as greasebox from '../source/index';
+import cofs from '../dist/cofs';
 
-    var exclusions = [].map(function (name) {
-      return computeName(name);
-    });
+describe('greasebox', () => {
+  it('should contain all the modules', (cb) => {
+    let exclusions = new Set( [].map(name => computeName(name)) );
 
-    co(function*() {
-      var modules =
-        yield cofs.readdir(path.resolve(__dirname, '../source'));
-      for (var i = 0; i < modules.length; i++) {
-        if (modules[i].match(/\.js$/) && modules[i] !== 'index.js') {
-          var name = computeName(modules[i]);
-          if(exclusions.indexOf(name) === -1 && !greasebox[name]) {
-            throw Error('module ' + name + ' is not found');
+    co(function * () {
+      let modules = yield cofs.readdir(path.resolve(__dirname, '../source'));
+      modules.forEach((name) => {
+        if(name.match(/\.js$/) && name !== 'index.js') {
+          name = computeName(name);
+          if(!(exclusions.has(name) || greasebox[name])) {
+            throw Error(`module ${name} is not found on greasebox.`);
           }
         }
-      }
-    }).then(function () {
-      cb();
-    }).catch(function (err) {
-      cb(err);
-    });
+      });
+    }).then(cb)
+      .catch(cb);
   });
-
 });
+
 function computeName(name) {
   name = name.split('.')[0].split('-');
-  for (j = 1; j < name.length; j++) {
+  for (let j = 1; j < name.length; j++) {
     name[j] = name[j][0].toUpperCase() + name[j].substring(1);
   }
   return name.join('');

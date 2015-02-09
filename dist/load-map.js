@@ -1,84 +1,50 @@
-"use strict";
+import through from 'through2';
+import cofs from './cofs';
+import co from 'co';
+import path from 'path';
+import chalk from 'chalk';
+import debug from 'debug';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
-var through = _interopRequire(require("through2"));
-
-var cofs = _interopRequire(require("./cofs"));
-
-var co = _interopRequire(require("co"));
-
-var path = _interopRequire(require("path"));
-
-var chalk = _interopRequire(require("chalk"));
-
-var debug = _interopRequire(require("debug"));
-
-var log = debug("loadMap");
+let log = debug('loadMap');
 /**
  * @function loadMap
  */
 function loadMap(ext) {
   if (!ext) {
-    ext = ".map";
+    ext = '.map';
   }
   return through.obj(function (file, enc, next) {
     if (file.isNull()) {
       next();
     } else {
       var self = this;
-      co(regeneratorRuntime.mark(function callee$2$0() {
-        var mapFile, map;
-        return regeneratorRuntime.wrap(function callee$2$0$(context$3$0) {
-          while (1) switch (context$3$0.prev = context$3$0.next) {
-            case 0:
-              mapFile = file.path + ext;
-              context$3$0.prev = 1;
-              context$3$0.next = 4;
-              return cofs.exists(mapFile);
-            case 4:
-              if (!context$3$0.sent) {
-                context$3$0.next = 11;
-                break;
-              }
-              context$3$0.next = 7;
-              return cofs.readFile(mapFile);
-            case 7:
-              context$3$0.t4 = context$3$0.sent;
-              map = JSON.parse(context$3$0.t4);
-              context$3$0.next = 12;
-              break;
-            case 11:
-              map = {
-                version: 3,
-                file: file.relative,
-                names: [],
-                mappings: "",
-                sources: [file.relative],
-                sourcesContent: [file.contents.toString(enc)],
-                sourceRoot: "/" + path.relative(file.cwd, file.base) + "/"
-              };
-            case 12:
-              file.sourceMap = map;
-              self.push(file);
-              next();
-              context$3$0.next = 22;
-              break;
-            case 17:
-              context$3$0.prev = 17;
-              context$3$0.t5 = context$3$0["catch"](1);
-              console.log("[" + chalk.cyan("loadMap") + "] Failed to load source map for " + chalk.red(file.path));
-              log(context$3$0.t5);
-              next(context$3$0.t5);
-            case 22:
-            case "end":
-              return context$3$0.stop();
+      co(function* () {
+        var mapFile = file.path + ext;
+        var map;
+        try {
+          if (yield cofs.exists(mapFile)) {
+            map = JSON.parse(yield cofs.readFile(mapFile));
+          } else {
+            map = {
+              version: 3,
+              file: file.relative,
+              names: [],
+              mappings: '',
+              sources: [file.relative],
+              sourcesContent: [file.contents.toString(enc)],
+              sourceRoot: '/' + path.relative(file.cwd, file.base) + '/'
+            };
           }
-        }, callee$2$0, this, [[1, 17]]);
-      }));
+          file.sourceMap = map;
+          self.push(file);
+          next();
+        } catch (err) {
+          console.log(`[${ chalk.cyan( 'loadMap' ) }] Failed to load source map for ${chalk.red( file.path )}`);
+          log(err);
+          next(err);
+        }
+      });
     }
   });
 }
-module.exports = loadMap;
-
-//# sourceMappingURL=./load-map.js.map
+export default loadMap;

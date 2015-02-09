@@ -1,29 +1,29 @@
-var expect = require('chai').expect;
-var path = require('path');
-var gulp = require('gulp');
-var through = require('through2');
-var co = require('co');
+import chai from 'chai';
+import path from 'path';
+import gulp from 'gulp';
+import through from 'through2';
+import co from 'co';
 
+const expect = chai.expect;
+import forEach from '../source/co-foreach';
+import sleep from '../dist/sleep';
 
-
-var coForeach = require(path.resolve(__dirname, '../source/co-foreach'));
-
-describe('coForeach', function() {
-
-  it('should be a function', function () {
-    expect(coForeach).to.be.a('function');
+describe('coForeach', () => {
+  it('should be a function', () => {
+    expect(forEach).to.be.a('function');
   });
 
-  //it('should be a generator function', function () {
-  //  var gen = coForeach();
-  //  expect(gen).to.exist();
-  //  expect(gen.next).to.be.a('function');
-  //});
+  it('should return a promise', (cb) => {
+    let gen = forEach([1, 2, 3]);
+    expect(gen).to.exist();
+    expect(gen instanceof Promise).to.equal(true);
+    gen.then(cb).catch(cb);
+  });
 
   it('should be yieldable', function (cb) {
     co(function * () {
       try {
-        yield coForeach([], function * () {});
+        yield forEach([], function * () {});
         cb();
       } catch(err) {
         cb(err);
@@ -31,62 +31,64 @@ describe('coForeach', function() {
     });
   });
 
-  it('should pass array item and index to the handler', function (cb) {
-    co(function * () {
-      var testArr = [0, 1, 2];
-      yield coForeach(testArr, function *(no, idx) {
-        expect(no).to.equal(idx);
-      });
-      cb();
+  it('should pass array item and index to the handler', (cb) => {
+    let testArr = [0, 1, 2];
+    forEach(testArr, function*(no, idx) {
+      expect(no).to.equal(idx);
+    }).then(cb)
+    .catch(cb);
+  });
 
-    }).catch(function (err) {
-      cb(err);
+  it('should iterate over the array in order asynchronously', (cb) => {
+    co(function * () {
+      let testArr = [1, 2, 3];
+      var result = [];
+      yield forEach(testArr, function * (no, idx) {
+        yield sleep(100);
+        result.push(no);
+      });
+      expect(result).to.deep.equal(testArr);
+    }).then(cb)
+    .catch(cb);
+  });
+
+  it('should accept non generator functions if they return promises', (cb) => {
+    co(function * () {
+      yield forEach([0, 1, 2], function(no, idx) {
+        return Promise.resolve();
+      });
+    }).then(cb)
+    .catch(cb);
+  });
+
+  it('should reject if generator function handler throws', (cb) => {
+    forEach([0, 1, 2], function * (no, idx){
+      throw('test');
+    }).then(() => {
+      cb(new Error('error was not captured'));
+    }).catch((err)=> {
+      try {
+        expect(err).to.equal('test');
+        cb();
+      } catch(ferr) {
+        cb(ferr);
+      }
     });
   });
 
-  it('should iterate over the array in order', function (cb) {
-    co(function * () {
-        var testArr = [1, 2, 3];
-        var result = [];
-        yield coForeach(testArr, function *(no, idx) {
-          //yield new Promise(function (resolve) {
-          //  setTimeout(resolve, 100);
-          //});
-          yield sleep(100);
-          result.push(no);
-        });
-        expect(result).to.deep.equal(testArr);
+  it('should reject if non generator function handler rejects', (cb) => {
+    forEach([0, 1, 2], () => {
+      return Promise.reject('test');
+    }).then(() => {
+      cb(new Error('error was not captured'));
+    }).catch((err) => {
+      try{
+        expect(err).to.equal('test');
         cb();
-    }).catch(cb);
+      } catch (ferr) {
+        cb(ferr);
+      }
+    });
   });
-
-  it('should return promise when not used in generator context', function (cb) {
-    coForeach([1, 2, 3], function * () {
-
-    }).then(cb);
-  });
-
-  it('should work with non generator functions if it returns promise', function (cb) {
-    co(function * () {
-      yield coForeach([0, 1, 2], function (no, idx) {
-        expect(no).to.equal(idx);
-        return Promise.resolve();
-      });
-      cb();
-    }).catch(cb);
-  });
-
-
 });
 
-
-//function sleep(t) {
-//  return new Promise(function (resolve) {
-//    setTimeout(resolve, t);
-//  });
-//}
-function sleep(t) {
-  return function (cb) {
-    setTimeout(cb, t);
-  };
-}

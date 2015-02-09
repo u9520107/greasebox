@@ -31,12 +31,6 @@ describe('rm', function() {
         cb();
       });
   });
-  it('should be a generator function', function () {
-    expect(rm).to.be.a('function');
-    var obj = rm();
-    expect(obj.next).to.be.a('function');
-    expect(obj.throw).to.be.a('function');
-  });
   it('should accept 1 parameter', function () {
     expect(rm.length).to.equal(1);
   });

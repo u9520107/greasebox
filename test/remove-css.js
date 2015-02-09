@@ -17,7 +17,7 @@ describe('removeCss', function() {
   });
 
   it('should return an writable object', function() {
-    obj = removeCss();
+    let obj = removeCss();
     expect(obj).to.be.a('object');
     expect(obj.writable).to.equal(true);
   });

@@ -19,7 +19,8 @@ describe('loadMap', function() {
   });
 
   it('should return an stream-reader', function() {
-    obj = loadMap();
+    let obj = loadMap();
+
     expect(obj).to.be.a('object');
     expect(obj.writable).to.equal(true);
   });

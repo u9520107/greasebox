@@ -1,20 +1,13 @@
-"use strict";
+import through from 'through2';
+import path from 'path';
+import gutil from 'gulp-util';
+import chalk from 'chalk';
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
-
-var through = _interopRequire(require("through2"));
-
-var path = _interopRequire(require("path"));
-
-var gutil = _interopRequire(require("gulp-util"));
-
-var chalk = _interopRequire(require("chalk"));
-
-var hasSourceMappingUrl = /^\/\/# sourceMappingURL=/;
+const hasSourceMappingUrl = /^\/\/# sourceMappingURL=/;
 
 function writeMap(root, ext) {
   if (!ext) {
-    ext = ".map";
+    ext = '.map';
   }
   return through.obj(function (file, enc, next) {
     if (file.isNull()) {
@@ -23,7 +16,7 @@ function writeMap(root, ext) {
       var sourceRoot = root ? root : file.sourceMap.sourceRoot;
       //replace
       if (sourceRoot !== file.sourceMap.sourceRoot) {
-        var nameCheck = new RegExp("^" + escapeRegExp(sourceRoot));
+        var nameCheck = new RegExp('^' + escapeRegExp(sourceRoot));
         file.sourceMap.sources = file.sourceMap.sources.map(function (name) {
           /**
            *  Else cases happens when transformation had gone through file name changes.
@@ -34,7 +27,7 @@ function writeMap(root, ext) {
            *  Marks to be difficult to test after using 6to5 instead of traceur.
            */
           /* istanbul ignore else */
-          if (name[0] !== "/" && name[0] !== "@") {
+          if (name[0] !== '/' && name[0] !== '@') {
             return file.sourceMap.sourceRoot + name;
           } else if (name.match(nameCheck)) {
             return name.substring(sourceRoot.length);
@@ -53,8 +46,8 @@ function writeMap(root, ext) {
 
       // add sourceMappingURL if not found in source
       var src = file.contents.toString(enc);
-      if (!hasSourceMappingUrl.test(src)) {
-        src += "\n\n//# sourceMappingURL=./" + path.basename(mapFile.path);
+      if(!hasSourceMappingUrl.test(src)) {
+        src += `\n\n//# sourceMappingURL=./${path.basename(mapFile.path)}`;
         file.contents = new Buffer(src);
       }
 
@@ -70,8 +63,6 @@ function writeMap(root, ext) {
  *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
  */
 function escapeRegExp(string) {
-  return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
+  return string.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
 }
-module.exports = writeMap;
-
-//# sourceMappingURL=./write-map.js.map
+export default writeMap;
