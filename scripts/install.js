@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 var fs = require('fs');
 
-if(!fs.existsSync('dist')) {
+if(!fs.existsSync('source')) {
   gulp.src(['dist/*'])
   .pipe(gulp.dest('source'))
   .on('error', console.log)
