@@ -1,10 +1,18 @@
-import through from 'through2';
-import recast from 'recast';
-import applyMap from 'vinyl-sourcemaps-apply';
-import chalk from 'chalk';
-import debug from 'debug';
+"use strict";
 
-let log = debug('removeCss');
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+var through = _interopRequire(require("through2"));
+
+var recast = _interopRequire(require("recast"));
+
+var applyMap = _interopRequire(require("vinyl-sourcemaps-apply"));
+
+var chalk = _interopRequire(require("chalk"));
+
+var debug = _interopRequire(require("debug"));
+
+var log = debug("removeCss");
 /**
  * @function
  *
@@ -19,8 +27,8 @@ function removeCss() {
         var body = [];
         //remove css imports
         ast.program.body.forEach(function (part) {
-          if (part.type === 'ImportDeclaration' && part.source.value.match(/\.css!$/i)) {
-            log('removed %s', part.source.value);
+          if (part.type === "ImportDeclaration" && part.source.value.match(/\.css!$/i)) {
+            log("removed %s", part.source.value);
           } else {
             body.push(part);
           }
@@ -31,7 +39,7 @@ function removeCss() {
         if (file.sourceMap && output.map) {
           output.map.sourceRoot = file.buildStep;
           applyMap(file, output.map);
-          file.buildStep = '@remove-css/';
+          file.buildStep = "@remove-css/";
         }
         this.push(file);
       } else {
@@ -39,10 +47,12 @@ function removeCss() {
       }
       next();
     } catch (err) {
-      console.log(`[${ chalk.cyan( 'removeCss' ) }] Failed to transform ${chalk.red( file.path )}`);
+      console.log("[" + chalk.cyan("removeCss") + "] Failed to transform " + chalk.red(file.path));
       log(err);
       next(err);
     }
   });
 }
-export default removeCss;
+module.exports = removeCss;
+
+//# sourceMappingURL=./remove-css.js.map

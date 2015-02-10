@@ -1,8 +1,8 @@
 {
   "name": "greasebox",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "greasebox\r =========",
-  "main": "source/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "gulp test"
   },
@@ -48,7 +48,7 @@
     "dependencies": {
       "lib": "lib"
     },
-    "main": "source/index.js",
+    "main": "dist/index.js",
     "configFile": "jspm_packages/config.js",
     "registry": "jspm",
     "dependencies": {

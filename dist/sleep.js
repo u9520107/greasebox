@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * @exports default
  * @function
@@ -7,13 +9,16 @@
  *  Thunk based sleep is lighter, but isnt' as flexible.
  */
 
-export default function sleep(t) {
-  t = ~~t;
+module.exports = sleep;
+function sleep(t) {
+  t = ~ ~t;
   if (t > 0) {
-    return new Promise((resolve) => {
+    return new Promise(function (resolve) {
       setTimeout(resolve, t);
     });
   } else {
     return Promise.resolve();
   }
 }
+
+//# sourceMappingURL=./sleep.js.map

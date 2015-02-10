@@ -1,11 +1,20 @@
-import through from 'through2';
-import Renderer from 'stylus/lib/renderer';
-import applyMap from 'vinyl-sourcemaps-apply';
-import path from 'path';
-import chalk from 'chalk';
-import debug from 'debug';
+"use strict";
 
-let log = debug('stylusTransform');
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+var through = _interopRequire(require("through2"));
+
+var Renderer = _interopRequire(require("stylus/lib/renderer"));
+
+var applyMap = _interopRequire(require("vinyl-sourcemaps-apply"));
+
+var path = _interopRequire(require("path"));
+
+var chalk = _interopRequire(require("chalk"));
+
+var debug = _interopRequire(require("debug"));
+
+var log = debug("stylusTransform");
 /**
  * @function
  *
@@ -20,7 +29,7 @@ function stylusTransform() {
         var useSourceMaps = !!file.sourceMap;
         var opts = { filename: path.basename(file.path) };
         if (useSourceMaps) {
-          opts.sourcemap = 'comment';
+          opts.sourcemap = "comment";
         }
         var renderer = new Renderer(src, opts);
         var output = renderer.render();
@@ -30,19 +39,21 @@ function stylusTransform() {
           map.sourcesContent = [src];
           map.sourceRoot = file.buildStep;
           applyMap(file, map);
-          file.buildStep = '@stylus/';
+          file.buildStep = "@stylus/";
         }
-        file.path = file.path.replace(/\.styl$/, '.css');
+        file.path = file.path.replace(/\.styl$/, ".css");
         this.push(file);
       } else {
         this.push(file);
       }
       next();
     } catch (err) {
-      console.log(`[${ chalk.cyan( 'stylusTransform' ) }] Failed to transform ${chalk.red( file.path )}`);
+      console.log("[" + chalk.cyan("stylusTransform") + "] Failed to transform " + chalk.red(file.path));
       log(err);
       next(err);
     }
   });
 }
-export default stylusTransform;
+module.exports = stylusTransform;
+
+//# sourceMappingURL=./stylus-transform.js.map
