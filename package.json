@@ -1,8 +1,8 @@
 {
   "name": "greasebox",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "description": "greasebox\r =========",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "gulp test"
   },
