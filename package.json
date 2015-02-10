@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "greasebox\r =========",
   "main": "dist/index.js",
   "scripts": {
