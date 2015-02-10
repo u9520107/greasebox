@@ -1,7 +1,3 @@
-"use strict";
-
-var _core = require("6to5-runtime/core-js");
-
 /**
  * @exports default
  * @function
@@ -11,16 +7,13 @@ var _core = require("6to5-runtime/core-js");
  *  Thunk based sleep is lighter, but isnt' as flexible.
  */
 
-module.exports = sleep;
-function sleep(t) {
-  t = ~ ~t;
+export default function sleep(t) {
+  t = ~~t;
   if (t > 0) {
-    return new _core.Promise(function (resolve) {
+    return new Promise((resolve) => {
       setTimeout(resolve, t);
     });
   } else {
-    return _core.Promise.resolve();
+    return Promise.resolve();
   }
 }
-
-//# sourceMappingURL=./sleep.js.map

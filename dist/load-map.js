@@ -1,26 +1,17 @@
-"use strict";
+import through from 'through2';
+import cofs from './cofs';
+import co from 'co';
+import path from 'path';
+import chalk from 'chalk';
+import debug from 'debug';
 
-var _to5Helpers = require("6to5-runtime/helpers");
-
-var through = _to5Helpers.interopRequire(require("through2"));
-
-var cofs = _to5Helpers.interopRequire(require("./cofs"));
-
-var co = _to5Helpers.interopRequire(require("co"));
-
-var path = _to5Helpers.interopRequire(require("path"));
-
-var chalk = _to5Helpers.interopRequire(require("chalk"));
-
-var debug = _to5Helpers.interopRequire(require("debug"));
-
-var log = debug("loadMap");
+let log = debug('loadMap');
 /**
  * @function loadMap
  */
 function loadMap(ext) {
   if (!ext) {
-    ext = ".map";
+    ext = '.map';
   }
   return through.obj(function (file, enc, next) {
     if (file.isNull()) {
@@ -32,23 +23,23 @@ function loadMap(ext) {
         var map;
         try {
           if (yield cofs.exists(mapFile)) {
-            map = JSON.parse((yield cofs.readFile(mapFile)));
+            map = JSON.parse(yield cofs.readFile(mapFile));
           } else {
             map = {
               version: 3,
               file: file.relative,
               names: [],
-              mappings: "",
+              mappings: '',
               sources: [file.relative],
               sourcesContent: [file.contents.toString(enc)],
-              sourceRoot: "/" + path.relative(file.cwd, file.base) + "/"
+              sourceRoot: '/' + path.relative(file.cwd, file.base) + '/'
             };
           }
           file.sourceMap = map;
           self.push(file);
           next();
         } catch (err) {
-          console.log("[" + chalk.cyan("loadMap") + "] Failed to load source map for " + chalk.red(file.path));
+          console.log(`[${ chalk.cyan( 'loadMap' ) }] Failed to load source map for ${chalk.red( file.path )}`);
           log(err);
           next(err);
         }
@@ -56,6 +47,4 @@ function loadMap(ext) {
     }
   });
 }
-module.exports = loadMap;
-
-//# sourceMappingURL=./load-map.js.map
+export default loadMap;
