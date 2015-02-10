@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "greasebox\r =========",
   "main": "dist/index.js",
   "scripts": {
@@ -45,9 +45,10 @@
     "vinyl-sourcemaps-apply": "^0.1.4"
   },
   "jspm": {
+    "main": "source/index.js",
     "directories": {
-      "lib": "lib",
-      "dist": "source"
+      "dist": "source",
+      "lib": "lib"
     },
     "configFile": "jspm_packages/config.js",
     "dependencies": {
