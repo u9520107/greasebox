@@ -3,15 +3,38 @@ import path from 'path';
 import co from 'co';
 import through from 'through2';
 
-import rm from '../dist/rm';
+import * as gb from '../dist/index';
 
-gulp.task('build', ['test'], (cb) => {
-  rm(path.resolve(__dirname, '../dist'))
+gulp.task('build', ['build-tmp'], (cb) => {
+  gb.rm(path.resolve(__dirname, '../dist'))
+    .then(() => {
+      gulp.src('tmp/*')
+        .pipe(gulp.dest('dist'))
+        .on('finish', () => {
+            gb.rm(path.resolve(__dirname, '../tmp'))
+              .then(cb)
+              .catch(cb);
+        });
+    }).catch(cb);
+});
+
+gulp.task('build-tmp', ['test'], (cb) => {
+  gb.rm(path.resolve(__dirname, '../tmp'))
     .then(() => {
       gulp.src('source/*.js')
-        .pipe(gulp.dest('dist'))
+        .pipe(gb.loadMap())
+        .pipe(gb.to5Transform({
+          blacklist: [
+            'regenerator'
+          ],
+          optional: [
+            'selfContained'
+          ]
+        }))
+        .pipe(gb.writeMap())
+        .pipe(gulp.dest('tmp'))
         .on('error', cb)
         .on('finish', cb);
-    })
-    .catch(cb);
+    }).catch(cb);
 });
+

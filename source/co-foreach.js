@@ -1,7 +1,4 @@
-"use strict";
-
-var _to5Helpers = require("6to5-runtime/helpers");
-
+import co from 'co';
 /**
  * @function
  *  @param {array} array - The array to iterate over
@@ -14,17 +11,12 @@ var _to5Helpers = require("6to5-runtime/helpers");
 //  }
 //}
 
-module.exports = forEach;
-var co = _to5Helpers.interopRequire(require("co"));
-
-function forEach(arr, fn) {
-  return co(function* () {
-    if (fn) {
+export default function forEach(arr, fn) {
+  return co(function * () {
+    if(fn) {
       for (var i = 0, len = arr.length; i < len; i++) {
         yield fn(arr[i], i);
       }
     }
   });
 }
-
-//# sourceMappingURL=./co-foreach.js.map

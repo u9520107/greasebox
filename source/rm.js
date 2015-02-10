@@ -1,16 +1,9 @@
-"use strict";
+import cofs from './cofs';
+import co from 'co';
+import path from 'path';
 
-var _to5Helpers = require("6to5-runtime/helpers");
-
-module.exports = rm;
-var cofs = _to5Helpers.interopRequire(require("./cofs"));
-
-var co = _to5Helpers.interopRequire(require("co"));
-
-var path = _to5Helpers.interopRequire(require("path"));
-
-function rm(filepath) {
-  return co(function* () {
+export default function rm(filepath) {
+  return co(function * () {
     if (yield cofs.exists(filepath)) {
       if ((yield cofs.stat(filepath)).isDirectory()) {
         //remove content of directory
@@ -24,5 +17,3 @@ function rm(filepath) {
     }
   });
 }
-
-//# sourceMappingURL=./rm.js.map
