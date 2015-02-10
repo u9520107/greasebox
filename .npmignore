@@ -1,4 +1,5 @@
-*
+/*
 
-!package.json
-!dist/
+!/package.json
+!/dist
+!/source
