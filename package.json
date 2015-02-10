@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.5.14",
+  "version": "0.5.15",
   "description": "greasebox\r =========",
   "main": "dist/index.js",
   "scripts": {
@@ -50,7 +50,7 @@
       "lib": "lib"
     },
     "map": {
-      "./dist/co-fs.js": "./source/co-fs.js"
+      "./dist": "./source"
     },
     "main": "source/index.js",
     "configFile": "jspm_packages/config.js",
