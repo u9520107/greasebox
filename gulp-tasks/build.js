@@ -1,7 +1,6 @@
 import gulp from 'gulp';
 import path from 'path';
 import co from 'co';
-import through from 'through2';
 
 import * as gb from '../dist/index';
 
