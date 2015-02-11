@@ -18,8 +18,9 @@ gulp.task('publish', /*['build'],*/ (cb) => {
     let manifest = JSON.parse(yield cofs.readFile(path.resolve(__dirname, '../package.json')));
     if(semver.gt(manifest.version, latest)) {
       manifest.main = "index.js";
-      delete manifest.jspm.directories;
       delete manifest.scripts.install;
+      delete manifest.jspm.directories;
+      manifest.jspm.registry = "jspm";
       yield cofs.writeFile(path.resolve(__dirname, '../dist/package.json'), JSON.stringify(manifest, null, 2));
       log( yield exec('npm publish', {
         cwd: path.resolve(__dirname, '../dist')
