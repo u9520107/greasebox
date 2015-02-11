@@ -23,7 +23,9 @@ gulp.task('build-tmp', ['test'], (cb) => {
     .then(() => {
       gulp.src('source/*.js')
         .pipe(gb.loadMap())
-        .pipe(gb.to5Transform())
+        .pipe(gb.to5Transform({
+          optional: ['selfContained']
+        }))
         .pipe(gb.writeMap())
         .pipe(gulp.dest('tmp'))
         .on('finish', cb)
