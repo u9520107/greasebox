@@ -9,7 +9,7 @@ import debug from 'debug';
 debug.enable('publish-log');
 const log = debug('publish-log');
 
-gulp.task('publish', /*['build'],*/ (cb) => {
+gulp.task('publish', ['build'], (cb) => {
   co(function * () {
     let info = JSON.parse(yield exec('npm view --json greasebox'));
     info.versions.sort(sortSemver);
