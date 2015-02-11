@@ -4,7 +4,7 @@
   "description": "greasebox\r =========",
   "scripts": {
     "test": "gulp test",
-    "install": "./scripts/install.js"
+    "install": "node scripts/install.js"
   },
   "repository": {
     "type": "git",

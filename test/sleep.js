@@ -24,7 +24,7 @@ describe('sleep', () => {
       let start = new Date().getTime();
       yield sleep(t);
       let end = new Date().getTime();
-      expect(end-start > t).to.equal(true);
+      expect( end-start  < t).to.equal(false);
     }).then(cb)
       .catch(cb);
   });
