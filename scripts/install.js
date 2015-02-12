@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 var gulp = require('gulp');
 var to5 = require('6to5');
 var path = require('path');
