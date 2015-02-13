@@ -5,8 +5,13 @@ import chalk from 'chalk';
 import to5 from '6to5';
 
 let log = debug('to5Transform');
-
+const DEFAULTS = {
+  optional: ['selfContained']
+};
 function to5Transform(opts = {}) {
+  if(!opts.optional) {
+    opts.optional = DEFAULTS.optional;
+  }
   return through.obj(function (file, enc, cb) {
     try {
       if (file.isNull()) {
