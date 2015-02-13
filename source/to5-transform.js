@@ -9,9 +9,9 @@ const DEFAULTS = {
   optional: ['selfContained']
 };
 function to5Transform(opts = {}) {
-  if(!opts.optional) {
-    opts.optional = DEFAULTS.optional;
-  }
+  //if(!opts.optional) {
+  //  opts.optional = DEFAULTS.optional;
+  //}
   return through.obj(function (file, enc, cb) {
     try {
       if (file.isNull()) {
