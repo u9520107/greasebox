@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "greasebox\r =========",
   "scripts": {
     "test": "gulp test",
@@ -29,8 +29,8 @@
     "semver": "^4.2.0"
   },
   "dependencies": {
-    "6to5": "^3.6.0",
-    "6to5-runtime": "^3.6.0",
+    "6to5": "3.5.3",
+    "6to5-runtime": "3.5.3",
     "chalk": "^0.5.1",
     "co": "^4.3.1",
     "co-read": "^0.1.1",
@@ -52,8 +52,8 @@
     },
     "configFile": "jspm_packages/config.js",
     "dependencies": {
-      "6to5": "npm:6to5@^3.6.0",
-      "6to5-runtime": "npm:6to5-runtime@^3.6.0",
+      "6to5": "npm:6to5@3.5.3",
+      "6to5-runtime": "npm:6to5-runtime@^3.5.3",
       "chalk": "npm:chalk@^0.5.1",
       "co": "npm:co@^4.3.1",
       "co-read": "npm:co-read@^0.1.1",
