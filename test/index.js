@@ -11,7 +11,7 @@ import cofs from '../dist/cofs';
 
 describe('greasebox', () => {
   it('should contain all the modules', (cb) => {
-    let exclusions = new Set( [].map(name => computeName(name)) );
+    let exclusions = new Set( ['gulpstrap'].map(name => computeName(name)) );
 
     co(function * () {
       let modules = yield cofs.readdir(path.resolve(__dirname, '../source'));

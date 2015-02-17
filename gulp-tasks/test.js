@@ -6,7 +6,6 @@ import through from 'through2';
 import esp from 'esprima-fb';
 
 import To5Instrumenter from '../dist/to5-instrumenter';
-
 gulp.task('test', (cb) => {
   gulp.src(['source/*.js'])
     .pipe(istanbul({
@@ -23,4 +22,3 @@ gulp.task('test', (cb) => {
       .on('end', cb);
     });
 });
-

@@ -17,7 +17,6 @@ gulp.task('publish', ['build'], (cb) => {
 
     let manifest = JSON.parse(yield cofs.readFile(path.resolve(__dirname, '../package.json')));
     if(semver.gt(manifest.version, latest)) {
-      manifest.main = "index.js";
       delete manifest.scripts.install;
       delete manifest.jspm.directories;
       manifest.jspm.registry = "jspm";

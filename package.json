@@ -46,7 +46,7 @@
     "vinyl-sourcemaps-apply": "^0.1.4"
   },
   "jspm": {
-    "main": "index.js",
+    "main": false,
     "directories": {
       "lib": "source"
     },
