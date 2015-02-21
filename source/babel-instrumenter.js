@@ -3,7 +3,7 @@ import esprima from 'esprima-fb';
 import sourceMap from 'source-map';
 import path from 'path';
 import fs from 'fs';
-import to5 from '6to5';
+import babel from 'babel';
 
 function createSourceMapConsumer(map) {
   if (typeof map === 'string') {
@@ -14,10 +14,10 @@ function createSourceMapConsumer(map) {
 /**
  *  Istanbul instrumenter extention that compiles es6 source into es5 version
  *
- *  @class To5Instrumenter
+ *  @class BabelInstrumenter
  *  @extends instanbul.Instrumenter
  */
-class To5Instrumenter extends istanbul.Instrumenter {
+export default class BabelInstrumenter extends istanbul.Instrumenter {
   /**
    *  @constructor
    *  @param {object} opts - options passed to istanbul.Instrumenter
@@ -26,7 +26,7 @@ class To5Instrumenter extends istanbul.Instrumenter {
     istanbul.Instrumenter.call(this, opts);
   }
   _compile(code, filename) {
-    var compiled = to5.transform(code, {
+    var compiled = babel.transform(code, {
       filename: filename,
       sourceMap: true
     });
@@ -95,4 +95,3 @@ class To5Instrumenter extends istanbul.Instrumenter {
     return super.getPreamble(sourceCode, emitUseStrict);
   }
 }
-export default To5Instrumenter;

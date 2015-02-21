@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "greasebox\r =========",
   "scripts": {
     "test": "gulp test",
@@ -29,8 +29,8 @@
     "semver": "^4.2.0"
   },
   "dependencies": {
-    "6to5": "3.5.3",
-    "6to5-runtime": "3.5.3",
+    "babel": "^4.4.3",
+    "babel-runtime": "^4.4.3",
     "chalk": "^0.5.1",
     "co": "^4.3.1",
     "co-read": "^0.1.1",
@@ -46,14 +46,13 @@
     "vinyl-sourcemaps-apply": "^0.1.4"
   },
   "jspm": {
-    "main": false,
     "directories": {
       "lib": "source"
     },
     "configFile": "jspm_packages/config.js",
     "dependencies": {
-      "6to5": "npm:6to5@3.5.3",
-      "6to5-runtime": "npm:6to5-runtime@^3.5.3",
+      "babel": "npm:babel@^4.4.3",
+      "babel-runtime": "npm:babel-runtime@^4.4.3",
       "chalk": "npm:chalk@^0.5.1",
       "co": "npm:co@^4.3.1",
       "co-read": "npm:co-read@^0.1.1",

@@ -1,6 +1,5 @@
 import path from 'path';
 import fs from 'fs';
-import to5 from '6to5';
 import gulp from 'gulp';
 import cp from 'child_process';
 import chalk from 'chalk';
@@ -9,7 +8,7 @@ const taskFile = /^[A-Za-z].*\.js$/i;
 
 export default function gulpstrap (){
   if(process.execArgv.indexOf('--harmony') > -1 || process.execPath.match(/iojs/)) {
-    to5.register();
+    require('babel/register');
     let dirname = process.cwd();
     if(process.platform === 'win32') {
       dirname = dirname[0].toLowerCase() + dirname.slice(1);

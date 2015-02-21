@@ -9,7 +9,7 @@ var writeMap = require(path.resolve(__dirname, '../source/write-map'));
 var rm = require(path.resolve(__dirname, '../dist/rm'));
 var loadMap = require(path.resolve(__dirname, '../dist/load-map'));
 var cofs = require(path.resolve(__dirname, '../dist/cofs'));
-var to5Transform = require(path.resolve(__dirname, '../dist/to5-transform'));
+var babelTransform = require(path.resolve(__dirname, '../dist/babel-transform'));
 var removeCss = require(path.resolve(__dirname, '../dist/remove-css'));
 
 describe('writeMap', function() {
@@ -106,7 +106,7 @@ describe('writeMap', function() {
     })
     .pipe(loadMap())
     .pipe(removeCss())
-    .pipe(to5Transform())
+    .pipe(babelTransform())
       .pipe(writeMap('/test/'))
       .pipe(through.obj(function(file, enc, next){
         if(!file.isNull() && file.path.match(/\.map$/)) {

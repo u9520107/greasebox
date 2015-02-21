@@ -2,16 +2,16 @@ import through from 'through2';
 import applyMap from 'vinyl-sourcemaps-apply';
 import debug from 'debug';
 import chalk from 'chalk';
-import to5 from '6to5';
+import babel from 'babel';
 
-let log = debug('to5Transform');
+let log = debug('babelTransform');
 const DEFAULTS = {
-  optional: ['selfContained']
+  optional: ['runtime']
 };
-function to5Transform(opts = {}) {
-  //if(!opts.optional) {
-  //  opts.optional = DEFAULTS.optional;
-  //}
+function babelTransform(opts = {}) {
+  if(!opts.optional) {
+    opts.optional = DEFAULTS.optional;
+  }
   return through.obj(function (file, enc, cb) {
     try {
       if (file.isNull()) {
@@ -24,11 +24,11 @@ function to5Transform(opts = {}) {
         opts.filenameRelative = file.relative;
 
         var src = file.contents.toString(enc);
-        var output = to5.transform(file.contents.toString(enc), opts);
+        var output = babel.transform(file.contents.toString(enc), opts);
         if(useSourceMap && output.map) {
           output.map.sourceRoot = file.buildStep || file.sourceMap.sourceRoot;
           applyMap(file, output.map);
-          file.buildStep = '@6to5/';
+          file.buildStep = '@babel/';
         }
         file.contents = new Buffer(output.code);
         if(file.path.match(/\.jsx$/i)) {
@@ -40,10 +40,10 @@ function to5Transform(opts = {}) {
       }
       cb();
     } catch (err) {
-      console.log(`[${ chalk.cyan( 'to5Transform' ) }] Failed to transform ${chalk.red( file.path )}`);
+      console.log(`[${ chalk.cyan( 'babelTransform' ) }] Failed to transform ${chalk.red( file.path )}`);
       log(err);
       cb(err);
     }
   });
 }
-export default to5Transform;
+export default babelTransform;

@@ -5,12 +5,12 @@ import mocha from 'gulp-mocha';
 import through from 'through2';
 import esp from 'esprima-fb';
 
-import To5Instrumenter from '../dist/to5-instrumenter';
+import BabelInstrumenter from '../dist/babel-instrumenter';
 gulp.task('test', (cb) => {
   gulp.src(['source/*.js'])
     .pipe(istanbul({
       includeUntested: true,
-      instrumenter: To5Instrumenter
+      instrumenter: BabelInstrumenter
     }))
     .pipe(istanbul.hookRequire())
     .on('error', cb)

@@ -7,9 +7,9 @@ import cofs from './cofs';
 import coStream from './co-stream';
 import coForeach from './co-foreach';
 import coMap from './co-map';
-import to5Instrumenter from './to5-instrumenter';
-import to5Transform from './to5-transform';
 import sleep from './sleep';
+import babelInstrumenter from './babel-instrumenter';
+import babelTransform from './babel-transform';
 
 export {
   loadMap,
@@ -21,7 +21,7 @@ export {
   coStream,
   coForeach,
   coMap,
-  to5Instrumenter,
-  to5Transform,
-  sleep
+  sleep,
+  babelInstrumenter,
+  babelTransform
 };

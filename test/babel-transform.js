@@ -6,14 +6,14 @@ var co = require('co');
 var recast = require('recast');
 
 
-var to5Transform = require(path.resolve(__dirname, '../source/to5-transform'));
-var _to5Transform = require(path.resolve(__dirname, '../dist/to5-transform'));
+var babelTransform = require(path.resolve(__dirname, '../source/babel-transform'));
+var _babelTransform = require(path.resolve(__dirname, '../dist/babel-transform'));
 var rm = require(path.resolve(__dirname, '../dist/rm'));
 var loadMap = require(path.resolve(__dirname, '../dist/load-map'));
 var cofs = require(path.resolve(__dirname, '../dist/cofs'));
 var removeCss = require(path.resolve(__dirname, '../dist/remove-css'));
 
-describe('to5Transform', function() {
+describe('babelTransform', function() {
   afterEach(function(cb) {
     co(function*() {
       yield rm(path.resolve(__dirname, 'tmp/traceur-transform'));
@@ -23,18 +23,18 @@ describe('to5Transform', function() {
 
 
   it('should be a function', function() {
-    expect(to5Transform).to.be.a('function');
+    expect(babelTransform).to.be.a('function');
   });
 
   it('should return a writable object', function() {
-    var obj = to5Transform();
+    var obj = babelTransform();
     expect(obj).to.exist();
     expect(obj.writable).to.equal(true);
   });
 
   it('should skip non-js files', function(cb) {
     gulp.src(path.resolve(__dirname, 'files/error.styl'))
-      .pipe(to5Transform())
+      .pipe(babelTransform())
       .pipe(through.obj(function(file, enc, next) {
         var transformed = file.contents.toString(enc);
         co(function*() {
@@ -55,7 +55,7 @@ describe('to5Transform', function() {
 
   it('should transform es6 files to node compliant modules by default', function(cb) {
     gulp.src(path.resolve(__dirname, 'files/a.js'))
-      .pipe(to5Transform())
+      .pipe(babelTransform())
       .pipe(gulp.dest(path.resolve(__dirname, 'tmp/traceur-transform')))
       .on('finish', function() {
         co(function * () {
@@ -79,7 +79,7 @@ describe('to5Transform', function() {
 
   it('should throw error when failed to parse js', function(cb) {
     gulp.src(path.resolve(__dirname, 'files/error.js'))
-      .pipe(to5Transform())
+      .pipe(babelTransform())
       .on('error', function(err) {
         try {
           expect(err).to.exist();
@@ -98,7 +98,7 @@ describe('to5Transform', function() {
     var result;
     var expected;
     gulp.src(path.resolve(__dirname, 'files/a.js'))
-      .pipe(to5Transform({
+      .pipe(babelTransform({
         blacklist: ['regenerator']
       }))
       .pipe(through.obj(function (file, enc, next) {
@@ -106,7 +106,7 @@ describe('to5Transform', function() {
           next();
       })).on('finish', function() {
         gulp.src(path.resolve(__dirname, 'files/a.js'))
-        .pipe(_to5Transform({
+        .pipe(_babelTransform({
           blacklist: ['regenerator']
         }))
         .pipe(through.obj(function (file, enc, next) {
@@ -135,7 +135,7 @@ describe('to5Transform', function() {
       this.push(file);
       next();
     }))
-    .pipe(to5Transform())
+    .pipe(babelTransform())
     .pipe(through.obj(function (file, enc, next) {
       var transformed = JSON.stringify(file.sourceMap);
       try {
@@ -153,7 +153,7 @@ describe('to5Transform', function() {
 
   it('should work with glob', function (cb) {
     gulp.src(path.resolve(__dirname, 'files/glob/**/*'))
-      .pipe(to5Transform())
+      .pipe(babelTransform())
       .on('error', function (err) {
         cb(err);
       })
@@ -164,7 +164,7 @@ describe('to5Transform', function() {
     gulp.src(path.resolve(__dirname, 'files/css.jsx'))
       .pipe(loadMap())
       .pipe(removeCss())
-      .pipe(to5Transform())
+      .pipe(babelTransform())
       .on('finish', cb);
   });
 });
