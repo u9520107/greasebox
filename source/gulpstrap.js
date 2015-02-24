@@ -10,9 +10,9 @@ export default function gulpstrap (){
   if(process.execArgv.indexOf('--harmony') > -1 || process.execPath.match(/iojs/)) {
     require('babel/register');
     let dirname = process.cwd();
-    if(process.platform === 'win32') {
-      dirname = dirname[0].toLowerCase() + dirname.slice(1);
-    }
+    //if(process.platform === 'win32') {
+    //  dirname = dirname[0].toLowerCase() + dirname.slice(1);
+    //}
     fs.readdirSync('gulp-tasks').forEach(function(task) {
       if(/^[A-Za-z].*\.js$/i.test(task)) {
         require(path.resolve(dirname, 'gulp-tasks', task));

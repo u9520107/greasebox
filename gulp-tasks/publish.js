@@ -28,8 +28,8 @@ gulp.task('publish', ['build'], (cb) => {
       log(`Trying to publish version: ${chalk.green( manifest.version )}, but latest npm version is ${chalk.green( latest )}.`);
     }
 
-  }).catch(cb)
-    .then(cb);
+  }).then(cb)
+    .catch(cb);
 });
 
 function sortSemver(a, b) {
