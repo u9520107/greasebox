@@ -28,7 +28,7 @@ describe('babelTransform', function() {
 
   it('should return a writable object', function() {
     var obj = babelTransform();
-    expect(obj).to.exist();
+    expect(obj).to.exist;
     expect(obj.writable).to.equal(true);
   });
 
@@ -61,12 +61,12 @@ describe('babelTransform', function() {
         co(function * () {
           var testMod = require(path.resolve(__dirname, 'tmp/traceur-transform/a.js'));
           try {
-            expect(testMod).to.exist();
-            expect(testMod).to.exist();
+            expect(testMod).to.exist;
+            expect(testMod).to.exist;
             expect(testMod).to.be.a('function');
             var obj = testMod();
-            expect(obj).to.exist();
-            expect(obj.next).to.exist();
+            expect(obj).to.exist;
+            expect(obj.next).to.exist;
             //obj should be a generator test passes
             cb();
           } catch (err) {
@@ -82,7 +82,7 @@ describe('babelTransform', function() {
       .pipe(babelTransform())
       .on('error', function(err) {
         try {
-          expect(err).to.exist();
+          expect(err).to.exist;
           cb();
         } catch(e) {
           cb(e);
@@ -114,8 +114,8 @@ describe('babelTransform', function() {
           next();
         })).on('finish', function() {
           try {
-            expect(result).to.exist();
-            expect(expected).to.exist();
+            expect(result).to.exist;
+            expect(expected).to.exist;
             expect(result).to.equal(expected);
             cb();
           } catch(err) {

@@ -16,7 +16,7 @@ describe('coMap', function() {
 
   //it('should be a generator function', function () {
   //  var gen = coMap();
-  //  expect(gen).to.exist();
+  //  expect(gen).to.exist;
   //  expect(gen.next).to.be.a('function');
   //});
 

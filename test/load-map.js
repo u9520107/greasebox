@@ -32,7 +32,7 @@ describe('loadMap', function() {
     .pipe(loadMap())
     .pipe(through.obj(function (file, enc, next){
       try {
-        expect(file.sourceMap).to.exist();
+        expect(file.sourceMap).to.exist;
         next();
       } catch(err) {
         next(err);
@@ -49,7 +49,7 @@ describe('loadMap', function() {
     .pipe(loadMap())
     .pipe(through.obj(function (file, enc, next){
       try {
-        expect(file.sourceMap).to.exist();
+        expect(file.sourceMap).to.exist;
         expect(file.sourceMap.isValid).to.equal(true);
         next();
       } catch(err) {
@@ -67,7 +67,7 @@ describe('loadMap', function() {
     .pipe(loadMap('.something'))
     .pipe(through.obj(function (file, enc, next){
       try {
-        expect(file.sourceMap).to.exist();
+        expect(file.sourceMap).to.exist;
         expect(file.sourceMap.isValid).to.equal(true);
         next();
       } catch(err) {
@@ -85,7 +85,7 @@ describe('loadMap', function() {
     .pipe(loadMap())
     .on('error', function (err) {
       try {
-        expect(err).to.exist();
+        expect(err).to.exist;
         cb();
       } catch(e) {
         cb(e);

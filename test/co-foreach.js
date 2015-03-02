@@ -15,7 +15,7 @@ describe('coForeach', () => {
 
   it('should return a promise', (cb) => {
     let gen = forEach([1, 2, 3]);
-    expect(gen).to.exist();
+    expect(gen).to.exist;
     expect(gen instanceof Promise).to.equal(true);
     gen.then(cb).catch(cb);
   });

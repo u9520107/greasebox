@@ -19,7 +19,7 @@ describe('writeMap', function() {
 
   it('should return a writable object', function () {
     var obj = writeMap();
-    expect(obj).to.exist();
+    expect(obj).to.exist;
     expect(obj.writable).to.equal(true);
   });
 

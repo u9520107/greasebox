@@ -87,7 +87,7 @@ describe('removeCss', function() {
       .pipe(removeCss())
       .on('error', function (err) {
         try {
-          expect(err).to.exist();
+          expect(err).to.exist;
           cb();
         } catch(e) {
           cb(e);
