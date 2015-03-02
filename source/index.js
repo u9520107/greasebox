@@ -10,6 +10,8 @@ import coMap from './co-map';
 import sleep from './sleep';
 import babelInstrumenter from './babel-instrumenter';
 import babelTransform from './babel-transform';
+import escapeRegExp from './escape-reg-exp';
+import removeImports from './remove-imports';
 
 export {
   loadMap,
@@ -23,5 +25,7 @@ export {
   coMap,
   sleep,
   babelInstrumenter,
-  babelTransform
+  babelTransform,
+  escapeRegExp,
+  removeImports
 };
