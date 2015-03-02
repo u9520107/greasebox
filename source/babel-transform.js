@@ -2,16 +2,12 @@ import through from 'through2';
 import applyMap from 'vinyl-sourcemaps-apply';
 import debug from 'debug';
 import chalk from 'chalk';
-import babel from 'babel';
+import * as babel from 'babel-core';
 
 let log = debug('babelTransform');
-//const DEFAULTS = {
-//  optional: ['runtime']
-//};
+
+
 function babelTransform(opts = {}) {
-  //if(!opts.optional) {
-  //  opts.optional = DEFAULTS.optional;
-  //}
   return through.obj(function (file, enc, cb) {
     try {
       if (file.isNull()) {

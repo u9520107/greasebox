@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var path = require('path');
 var fs = require('fs');
-require('babel/register');
+require('babel-core/register');
 
 var gb = require(path.resolve(__dirname, '../source/index'));
 

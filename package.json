@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "greasebox\r =========",
   "scripts": {
     "test": "gulp test",
@@ -15,9 +15,6 @@
   "bugs": {
     "url": "https://github.com/u9520107/greasebox/issues"
   },
-  "engines": {
-    "node": ">= 0.11.13"
-  },
   "homepage": "https://github.com/u9520107/greasebox",
   "devDependencies": {
     "chai": "^1.10.0",
@@ -29,8 +26,8 @@
     "semver": "^4.2.0"
   },
   "dependencies": {
-    "babel": "^4.4.5",
-    "babel-runtime": "^4.4.5",
+    "babel-core": "^4.6.3",
+    "babel-runtime": "^4.6.3",
     "chalk": "^1.0.0",
     "co": "^4.3.1",
     "co-read": "^0.1.1",
@@ -51,8 +48,8 @@
     },
     "configFile": "jspm_packages/config.js",
     "dependencies": {
-      "babel": "npm:babel@^4.4.5",
-      "babel-runtime": "npm:babel-runtime@^4.4.5",
+      "babel-core": "npm:babel-core@^4.6.3",
+      "babel-runtime": "npm:babel-runtime@^4.6.3",
       "chalk": "npm:chalk@^1.0.0",
       "co": "npm:co@^4.3.1",
       "co-read": "npm:co-read@^0.1.1",

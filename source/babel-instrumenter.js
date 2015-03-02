@@ -3,7 +3,7 @@ import esprima from 'esprima-fb';
 import sourceMap from 'source-map';
 import path from 'path';
 import fs from 'fs';
-import babel from 'babel';
+import * as babel from 'babel-core';
 
 function createSourceMapConsumer(map) {
   if (typeof map === 'string') {
