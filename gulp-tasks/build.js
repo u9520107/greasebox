@@ -18,6 +18,7 @@ gulp.task('build', ['build-tmp'], (cb) => {
     .catch(cb);
 });
 
+
 gulp.task('build-tmp', ['test'], (cb) => {
   gb.rm(path.resolve(__dirname, '../tmp'))
     .then(() => {

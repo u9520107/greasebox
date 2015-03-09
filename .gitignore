@@ -27,6 +27,7 @@ jspm_packages
 .lock-wscript
 
 dist
+client
 
 #vim
 *.swp
