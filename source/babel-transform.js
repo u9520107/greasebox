@@ -1,10 +1,8 @@
 import through from 'through2';
 import applyMap from 'vinyl-sourcemaps-apply';
-import debug from 'debug';
 import chalk from 'chalk';
 import * as babel from 'babel-core';
 
-let log = debug('babelTransform');
 
 
 function babelTransform(opts = {}) {
@@ -37,7 +35,7 @@ function babelTransform(opts = {}) {
       cb();
     } catch (err) {
       console.log(`[${ chalk.cyan( 'babelTransform' ) }] Failed to transform ${chalk.red( file.path )}`);
-      log(err);
+      console.log(err);
       cb(err);
     }
   });

@@ -2,9 +2,7 @@ import through from 'through2';
 import recast from 'recast';
 import applyMap from 'vinyl-sourcemaps-apply';
 import chalk from 'chalk';
-import debug from 'debug';
 
-let log = debug('removeCss');
 /**
  * @function
  *
@@ -20,7 +18,7 @@ function removeCss() {
         //remove css imports
         ast.program.body.forEach(function (part) {
           if (part.type === 'ImportDeclaration' && part.source.value.match(/\.css!$/i)) {
-            log('removed %s', part.source.value);
+            console.log('removed %s', part.source.value);
           } else {
             body.push(part);
           }
@@ -40,7 +38,7 @@ function removeCss() {
       next();
     } catch (err) {
       console.log(`[${ chalk.cyan( 'removeCss' ) }] Failed to transform ${chalk.red( file.path )}`);
-      log(err);
+      console.log(err);
       next(err);
     }
   });

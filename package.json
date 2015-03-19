@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.8.6",
+  "version": "0.9.0",
   "description": "greasebox\r =========",
   "scripts": {
     "test": "gulp test",
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/u9520107/greasebox",
   "devDependencies": {
-    "chai": "^1.10.0",
+    "chai": "^2.1.2",
     "co-exec": "^1.1.0",
     "gulp": "^3.8.10",
     "gulp-istanbul": "^0.6.0",
@@ -26,22 +26,22 @@
     "semver": "^4.2.0"
   },
   "dependencies": {
-    "babel-core": "4.7.3",
-    "babel-runtime": "4.7.3",
-    "chai": "^2.1.0",
+    "babel-core": "4.7.16",
     "chalk": "^1.0.0",
     "co": "^4.3.1",
     "co-read": "^0.1.1",
-    "debug": "^2.1.2",
-    "esprima-fb": "^10001.1.0-dev-harmony-fb",
+    "esprima-fb": "^13001.1001.0-dev-harmony-fb",
     "gulp-util": "^3.0.1",
     "istanbul": "^0.3.5",
-    "recast": "^0.9.8",
-    "source-map": "^0.1.43",
-    "stylus": "^0.49.3",
+    "recast": "^0.10.9",
+    "source-map": "^0.4.2",
+    "stylus": "^0.50.0",
     "through2": "^0.6.3",
     "thunkify": "^2.1.2",
     "vinyl-sourcemaps-apply": "^0.1.4"
+  },
+  "peerDependencies": {
+    "babel-runtime": "4.7.16"
   },
   "jspm": {
     "directories": {
@@ -49,20 +49,19 @@
     },
     "configFile": "jspm_packages/config.js",
     "dependencies": {
-      "babel-core": "npm:babel-core@4.7.3",
-      "babel-runtime": "npm:babel-runtime@4.7.3",
+      "babel-core": "npm:babel-core@4.7.16",
+      "babel-runtime": "npm:babel-runtime@4.7.16",
       "chalk": "npm:chalk@^1.0.0",
       "co": "npm:co@^4.3.1",
       "co-read": "npm:co-read@^0.1.1",
-      "debug": "npm:debug@^2.1.2",
-      "esprima-fb": "npm:esprima-fb@^10001.1.0-dev-harmony-fb",
+      "esprima-fb": "npm:esprima-fb@^13001.1001.0-dev-harmony-fb",
       "fs": "github:jspm/nodelibs-fs@^0.1.1",
       "gulp-util": "npm:gulp-util@^3.0.1",
       "istanbul": "npm:istanbul@^0.3.5",
       "path": "github:jspm/nodelibs-path@^0.1.0",
-      "recast": "npm:recast@^0.9.8",
-      "source-map": "npm:source-map@^0.1.43",
-      "stylus": "npm:stylus@^0.49.3",
+      "recast": "npm:recast@^0.10.9",
+      "source-map": "npm:source-map@^0.4.2",
+      "stylus": "npm:stylus@^0.50.0",
       "through2": "npm:through2@^0.6.3",
       "thunkify": "npm:thunkify@^2.1.2",
       "vinyl-sourcemaps-apply": "npm:vinyl-sourcemaps-apply@^0.1.4"
