@@ -12,7 +12,7 @@ var cofs = require(path.resolve(__dirname, '../dist/cofs'));
 describe('rm', function() {
   before(function (cb) {
     co(function *() {
-      if(!yield cofs.exists(path.resolve(__dirname, 'tmp'))) {
+      if(!(yield cofs.exists(path.resolve(__dirname, 'tmp')))) {
         yield cofs.mkdir(path.resolve(__dirname, 'tmp'));
       }
       yield cofs.mkdir(path.resolve(__dirname, 'tmp/rm'));

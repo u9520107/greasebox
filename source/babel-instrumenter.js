@@ -23,6 +23,7 @@ export default class BabelInstrumenter extends istanbul.Instrumenter {
    *  @param {object} opts - options passed to istanbul.Instrumenter
    */
   constructor(opts = {}) {
+    super();
     istanbul.Instrumenter.call(this, opts);
   }
   _compile(code, filename) {

@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "greasebox\r =========",
   "scripts": {
     "test": "gulp test",
@@ -20,17 +20,17 @@
     "chai": "^2.1.2",
     "co-exec": "^1.1.0",
     "gulp": "^3.8.10",
-    "gulp-istanbul": "^0.6.0",
+    "gulp-istanbul": "^0.8.1",
     "gulp-mocha": "^2.0.0",
     "mocha": "^2.0.1",
     "semver": "^4.2.0"
   },
   "dependencies": {
-    "babel-core": "4.7.16",
+    "babel-core": "5.0.9",
     "chalk": "^1.0.0",
     "co": "^4.3.1",
     "co-read": "^0.1.1",
-    "esprima-fb": "^13001.1001.0-dev-harmony-fb",
+    "esprima-fb": "^14001.1.0-dev-harmony-fb",
     "gulp-util": "^3.0.1",
     "istanbul": "^0.3.5",
     "recast": "^0.10.9",
@@ -41,7 +41,7 @@
     "vinyl-sourcemaps-apply": "^0.1.4"
   },
   "peerDependencies": {
-    "babel-runtime": "4.7.16"
+    "babel-runtime": "5.0.9"
   },
   "jspm": {
     "directories": {
@@ -49,12 +49,12 @@
     },
     "configFile": "jspm_packages/config.js",
     "dependencies": {
-      "babel-core": "npm:babel-core@4.7.16",
-      "babel-runtime": "npm:babel-runtime@4.7.16",
+      "babel-core": "npm:babel-core@5.0.9",
+      "babel-runtime": "npm:babel-runtime@5.0.9",
       "chalk": "npm:chalk@^1.0.0",
       "co": "npm:co@^4.3.1",
       "co-read": "npm:co-read@^0.1.1",
-      "esprima-fb": "npm:esprima-fb@^13001.1001.0-dev-harmony-fb",
+      "esprima-fb": "npm:esprima-fb@^14001.1.0-dev-harmony-fb",
       "fs": "github:jspm/nodelibs-fs@^0.1.1",
       "gulp-util": "npm:gulp-util@^3.0.1",
       "istanbul": "npm:istanbul@^0.3.5",
