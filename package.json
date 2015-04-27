@@ -16,19 +16,14 @@
     "url": "https://github.com/u9520107/greasebox/issues"
   },
   "homepage": "https://github.com/u9520107/greasebox",
-  "devDependencies": {
-    "chai": "^2.3.0",
-    "co-exec": "^1.1.0",
-    "gulp": "^3.8.11",
-    "gulp-mocha": "^2.0.1",
-    "semver": "^4.3.3"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "babel-core": "5.1.13",
+    "babel-core": "^5.1.13",
     "chalk": "^1.0.0",
     "co": "^4.5.2",
     "co-read": "^0.1.1",
     "esprima-fb": "^15001.1.0-dev-harmony-fb",
+    "gulp": "^3.8.11",
     "gulp-util": "^3.0.4",
     "istanbul": "^0.3.13",
     "recast": "^0.10.12",
