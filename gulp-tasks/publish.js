@@ -18,7 +18,7 @@ gulp.task('publish', ['build'], (cb) => {
 
     let latest = info.versions.pop();
 
-    if(semver.gt(manifest.version, latest)) {
+    if(!latest || semver.gt(manifest.version, latest)) {
       delete manifest.scripts.install;
       delete manifest.jspm.directories;
       manifest.jspm.registry = "jspm";

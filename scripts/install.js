@@ -1,17 +1,16 @@
 var gulp = require('gulp');
 var path = require('path');
 var fs = require('fs');
-
-require('babel-core/register');
-
-var gb = require(path.resolve(__dirname, '../source/index'));
+var sourcemaps = require('gulp-sourcemaps');
+var babel = require('gulp-babel');
 
 if(!fs.existsSync(path.resolve(__dirname, '../dist'))) {
   gulp.src('source/*.js')
-  .pipe(gb.loadMap())
-  .pipe(gb.babelTransform({
-    optional: ['runtime']
-  }))
-  .pipe(gb.writeMap())
-  .pipe(gulp.dest('dist'));
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      modules: 'common',
+      optional: ['runtime']
+    }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist'));
 }
