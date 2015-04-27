@@ -17,3 +17,4 @@ function coStream(stream) {
   };
 }
 export default coStream;
+

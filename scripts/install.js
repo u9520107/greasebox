@@ -4,8 +4,6 @@ var fs = require('fs');
 
 require('babel-core/register');
 
-var loadMap = require(path.resolve(__dirname, '../source/load-map'));
-
 var gb = require(path.resolve(__dirname, '../source/index'));
 
 if(!fs.existsSync(path.resolve(__dirname, '../dist'))) {
