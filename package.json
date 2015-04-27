@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "greasebox\r =========",
   "scripts": {
     "test": "gulp test",
@@ -42,19 +42,11 @@
       "babel-core": "npm:babel-core@5.1.13",
       "babel-runtime": "npm:babel-runtime@5.1.13",
       "chalk": "npm:chalk@^1.0.0",
-      "co": "npm:co@^4.3.1",
+      "co": "npm:co@^4.5.2",
       "co-read": "npm:co-read@^0.1.1",
-      "esprima-fb": "npm:esprima-fb@^15001.1.0-dev-harmony-fb",
       "fs": "github:jspm/nodelibs-fs@^0.1.1",
-      "gulp-util": "npm:gulp-util@^3.0.1",
-      "istanbul": "npm:istanbul@^0.3.5",
       "path": "github:jspm/nodelibs-path@^0.1.0",
-      "recast": "npm:recast@^0.10.9",
-      "source-map": "npm:source-map@^0.4.2",
-      "stylus": "npm:stylus@^0.50.0",
-      "through2": "npm:through2@^0.6.3",
-      "thunkify": "npm:thunkify@^2.1.2",
-      "vinyl-sourcemaps-apply": "npm:vinyl-sourcemaps-apply@^0.1.4"
+      "thunkify": "npm:thunkify@^2.1.2"
     }
   }
 }
