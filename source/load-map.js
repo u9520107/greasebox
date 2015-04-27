@@ -4,9 +4,6 @@ import co from 'co';
 import path from 'path';
 import chalk from 'chalk';
 
-/**
- * @function loadMap
- */
 function loadMap(ext) {
   if (!ext) {
     ext = '.map';
@@ -45,4 +42,5 @@ function loadMap(ext) {
     }
   });
 }
+
 export default loadMap;

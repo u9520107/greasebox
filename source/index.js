@@ -1,4 +1,3 @@
-import loadMap from './load-map';
 import removeCss from './remove-css';
 import rm from './rm';
 import writeMap from './write-map';
@@ -12,6 +11,7 @@ import babelInstrumenter from './babel-instrumenter';
 import babelTransform from './babel-transform';
 import escapeRegExp from './escape-reg-exp';
 import removeImports from './remove-imports';
+import loadMap from './load-map';
 
 export {
   loadMap,

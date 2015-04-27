@@ -3,7 +3,7 @@ import read from 'co-read';
  *  derived from juliangruber/co-from-stream
  */
 function coStream(stream) {
-  return function*(end) {
+  return function* (end) {
     if (end) {
       if (stream.end)
         stream.end();
