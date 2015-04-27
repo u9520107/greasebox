@@ -9,10 +9,15 @@ import chalk from 'chalk';
 gulp.task('publish', ['build'], (cb) => {
   co(function * () {
     let info = JSON.parse(yield exec('npm view --json greasebox'));
-    info.versions.sort(sortSemver);
+    let manifest = JSON.parse(yield cofs.readFile(path.resolve(__dirname, '../package.json')));
+
+    info.versions = info.versions.filter((v) => {
+      return semver.diff(manifest.version, v) === 'patch';
+    }).sort(sortSemver);
+
+
     let latest = info.versions.pop();
 
-    let manifest = JSON.parse(yield cofs.readFile(path.resolve(__dirname, '../package.json')));
     if(semver.gt(manifest.version, latest)) {
       delete manifest.scripts.install;
       delete manifest.jspm.directories;
