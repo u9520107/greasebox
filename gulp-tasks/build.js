@@ -14,7 +14,7 @@ gulp.task('build', ['build:tmp'], (cb) => {
     .on('error', cb);
 });
 
-gulp.task('build:tmp', () => {
+gulp.task('build:tmp', ['test'], () => {
   return gulp.src('source/*.js')
     .pipe(sourcemaps.init())
     .pipe(babel({
