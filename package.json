@@ -1,6 +1,6 @@
 {
   "name": "greasebox",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "description": "greasebox\r =========",
   "scripts": {
     "test": "gulp test",
@@ -24,13 +24,13 @@
     "semver": "^4.3.3"
   },
   "dependencies": {
+    "babel-core": "5.1.13",
     "chalk": "^1.0.0",
     "co": "^4.5.2",
     "co-read": "^0.1.1",
     "thunkify": "^2.1.2"
   },
   "peerDependencies": {
-    "babel-core": "5.1.13",
     "babel-runtime": "5.1.13"
   },
   "jspm": {
