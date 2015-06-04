@@ -24,9 +24,19 @@ export default class BabelInstrumenter extends istanbul.Instrumenter {
    */
   constructor(opts = {}) {
     super();
+    this._opts = opts;
     istanbul.Instrumenter.call(this, opts);
   }
   _compile(code, filename) {
+    if(this._opts.buildDir && this._opts.sourceDir) {
+      let builtFile = filename.replace(this._opts.sourceDir, this._opts.buildDir);
+      let compiled = {
+        code: fs.readFileSync(builtFile, 'utf8'),
+        map: JSON.parse(fs.readFileSync(`${builtFile}.map`, 'utf8'))
+      };
+      compiled.map.sources = [filename];
+      return compiled;
+    }
     var compiled = babel.transform(code, {
       filename: filename,
       sourceMap: true
