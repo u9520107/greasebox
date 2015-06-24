@@ -8,7 +8,9 @@ const taskFile = /^[A-Za-z].*\.js$/i;
 
 export default function gulpstrap (){
   if(process.execArgv.indexOf('--harmony') > -1 || process.execPath.match(/iojs/)) {
-    require('babel-core/register');
+    require('babel-core/register')({
+      stage: 0
+    });
     let dirname = process.cwd();
     //if(process.platform === 'win32') {
     //  dirname = dirname[0].toLowerCase() + dirname.slice(1);

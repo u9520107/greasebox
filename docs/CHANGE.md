@@ -1,6 +1,11 @@
 Change Log
 ===
 
+#v0.12.2
+**2015 Jun. 24**
+
+1. Use babel stage 0 in gulpstrap to allow es7 feature in gulp files
+
 #v0.12.0
 **2015 Jun. 04**
 

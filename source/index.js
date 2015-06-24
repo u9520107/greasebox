@@ -5,6 +5,7 @@ import coForeach from './co-foreach';
 import coMap from './co-map';
 import sleep from './sleep';
 import escapeRegExp from './escape-reg-exp';
+import dedent from './dedent';
 
 export {
   rm,
@@ -14,4 +15,5 @@ export {
   coMap,
   sleep,
   escapeRegExp,
+  dedent
 };
